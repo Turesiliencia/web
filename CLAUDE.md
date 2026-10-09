@@ -10,6 +10,8 @@ Website for **TuResiliencia**, a Spanish organization centred on "Reconstrucció
 
 The code is still the unmodified `create-next-app` scaffold: one route (`src/app/page.tsx`), placeholder metadata and `lang="en"` in `src/app/layout.tsx`, and the default SVGs in `public/`. Nothing of the real site exists yet.
 
+While the site is under construction, the root layout sets `robots: { index: false, follow: false }` for every page. It has to be removed at launch.
+
 The brief, the source material and the account details are not in the repository. They live in `CLAUDE.local.md` and `refs/`, both gitignored: when they exist, read `CLAUDE.local.md` before designing or writing content.
 
 ## Commands
