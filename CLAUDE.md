@@ -8,9 +8,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Website for **TuResiliencia**, a Spanish organization centred on "Reconstrucción Humana" (publishing, training, international cooperation). It will replace the current site at https://turesiliencia.com.
 
-The code is still the unmodified `create-next-app` scaffold: one route (`src/app/page.tsx`), placeholder metadata and `lang="en"` in `src/app/layout.tsx`, and the default SVGs in `public/`. Nothing of the real site exists yet.
+Today the site is a single "coming soon" welcome page, in Spanish at `/` and English at `/en`. The sections it announces (Academia, Cooperación, Alianzas, Editorial) do not exist yet.
 
-While the site is under construction, the root layout sets `robots: { index: false, follow: false }` for every page. It has to be removed at launch.
+While the site is under construction, `baseMetadata` in `src/content/metadata.ts` sets `robots: { index: false, follow: false }` for every page. It has to be removed at launch.
 
 The brief, the source material and the account details are not in the repository. They live in `CLAUDE.local.md` and `refs/`, both gitignored: when they exist, read `CLAUDE.local.md` before designing or writing content.
 
@@ -39,7 +39,15 @@ Three flags in `next.config.ts` shape how code must be written:
 
 Route prop types (`LayoutProps<'/'>`, `PageProps<...>`) are global helpers generated into `.next/types` by `next dev`, `next build` or `next typegen` — they are not imported, and `tsc` fails on them until one of those has run.
 
-Styling is plain CSS: global tokens in `src/app/globals.css` and CSS Modules per component. Tailwind is not installed.
+Styling is plain CSS: global tokens in `src/app/globals.css` and one CSS Module per component. Tailwind is not installed.
+
+## Architecture
+
+- **Two languages, two root layouts.** There is no `src/app/layout.tsx`: `src/app/(es)/layout.tsx` (`lang="es"`, routes at `/`) and `src/app/(en)/layout.tsx` (`lang="en"`, routes under `/en`) are both root layouts, so each language gets the right `<html lang>` with fully static pages and no proxy. A page exists once per language as a thin route file that renders a shared component with a `locale` prop. Navigating between the two is a full page load, and unmatched URLs get the default Next.js 404 (a shared one needs `global-not-found`, which is experimental).
+- **Copy lives in `src/content/`**, not in components: `home.ts` holds both languages side by side, `site.ts` the site-wide constants (URL, contact, locale paths), `metadata.ts` the metadata builders. The site URL is written by hand in `site.ts`; canonical, hreflang and social-card URLs derive from it.
+- **Design tokens** are in `src/app/globals.css`: navy and blues from the logo, gold and cream from the book cover, Cormorant Garamond for display and Montserrat (the wordmark's typeface) for text. One dark theme, no light variant.
+- **The logo is inline SVG** in `src/components/Logo.tsx`, built from the brand file: the emblem has a white underlay so its semi-transparent petals look the same on navy as on white, and the wordmark uses `currentColor`. `src/app/icon.svg`, `apple-icon.png` and `public/social-card.png` come from the same source.
+- **Don't read the clock during render**: with `cacheComponents`, `new Date()` in a Server Component fails prerendering, which is why the footer year is literal.
 
 ## Git and what can be committed
 
