@@ -6,9 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project state
 
-Website for **TuResiliencia**, a Spanish organization centred on "Reconstrucción Humana" (publishing, training, international cooperation). It will replace the current site at https://turesiliencia.com.
+Website for **TuResiliencia**, a Spanish organization centred on "Reconstrucción Humana" (publishing, training, international cooperation). It is the association's own site and will move to a domain of its own. https://turesiliencia.com is the founder's personal site, a separate site that this project does not replace or touch.
 
-Today the site is a single "coming soon" welcome page, in Spanish at `/` and English at `/en`. The sections it announces (Academia, Cooperación, Alianzas, Editorial) do not exist yet.
+Today the site is a single "coming soon" welcome page, in Spanish at `/` and English at `/en`, live at https://turesiliencia.vercel.app since 9 October 2026. The sections it announces (Academia, Cooperación, Alianzas, Editorial) do not exist yet. `README.md` is still the `create-next-app` boilerplate and describes none of this.
 
 While the site is under construction, `baseMetadata` in `src/content/metadata.ts` sets `robots: { index: false, follow: false }` for every page. It has to be removed at launch.
 
@@ -21,11 +21,18 @@ npm run dev      # dev server on http://localhost:3000
 npm run build    # production build
 npm run start    # serve the production build
 npm run lint     # ESLint (flat config: eslint-config-next core-web-vitals + typescript)
-npx eslint src/app/page.tsx              # lint a single file
-npx next typegen && npx tsc --noEmit     # type-check without building
+npx eslint src/components/ComingSoon.tsx   # lint a single file
+npx next typegen && npx tsc --noEmit       # type-check without building
 ```
 
 There is no test runner and no `type-check` script. Package manager is npm (`package-lock.json`).
+
+To look at a page without opening a browser, serve the build (`npx next start -p 3457`) and screenshot it with headless Chrome, at a desktop and a phone width, in both languages:
+
+```bash
+google-chrome --headless=new --hide-scrollbars --force-prefers-reduced-motion \
+  --window-size=390,844 --screenshot=/path/outside/the/repo/es-mobile.png http://localhost:3457/
+```
 
 ## Stack and configuration
 
@@ -46,12 +53,17 @@ Styling is plain CSS: global tokens in `src/app/globals.css` and one CSS Module 
 - **Two languages, two root layouts.** There is no `src/app/layout.tsx`: `src/app/(es)/layout.tsx` (`lang="es"`, routes at `/`) and `src/app/(en)/layout.tsx` (`lang="en"`, routes under `/en`) are both root layouts, so each language gets the right `<html lang>` with fully static pages and no proxy. A page exists once per language as a thin route file that renders a shared component with a `locale` prop. Navigating between the two is a full page load, and unmatched URLs get the default Next.js 404 (a shared one needs `global-not-found`, which is experimental).
 - **Copy lives in `src/content/`**, not in components: `home.ts` holds both languages side by side, `site.ts` the site-wide constants (URL, contact, locale paths), `metadata.ts` the metadata builders. The site URL is written by hand in `site.ts`; canonical, hreflang and social-card URLs derive from it.
 - **Design tokens** are in `src/app/globals.css`: navy and blues from the logo, gold and cream from the book cover, Cormorant Garamond for display and Montserrat (the wordmark's typeface) for text. One dark theme, no light variant.
-- **The logo is inline SVG** in `src/components/Logo.tsx`, built from the brand file: the emblem has a white underlay so its semi-transparent petals look the same on navy as on white, and the wordmark uses `currentColor`. `src/app/icon.svg`, `apple-icon.png` and `public/social-card.png` come from the same source.
+- **The logo is inline SVG** in `src/components/Logo.tsx`, built from the brand file: the emblem has a white underlay so its semi-transparent petals look the same on navy as on white, and the wordmark uses `currentColor`. `src/app/icon.svg`, `apple-icon.png` and `public/social-card.png` come from the same source. All of them were generated once with a throwaway script that is not in the repository: edit them by hand, or regenerate from the brand SVG if the logo changes.
 - **Don't read the clock during render**: with `cacheComponents`, `new Date()` in a Server Component fails prerendering, which is why the footer year is literal.
 
 ## Git and what can be committed
 
-Work goes straight to `main` on `Turesiliencia/web`. Pushes to `main` are meant to deploy to production, so run `npm run build` locally first.
+Work goes straight to `main` on `Turesiliencia/web`. Every push to `main` is a production deployment, so run `npm run lint` and `npm run build` locally first. A failed deployment keeps serving the previous one without warning; to check one:
+
+```bash
+gh api repos/Turesiliencia/web/commits/<sha>/status \
+  --jq '.statuses[] | "\(.context): \(.state) — \(.description)"'
+```
 
 **The repository is public: everything committed can be read by anyone, permanently.** Deleting a file later leaves it in history. The bar: if the organization has not already published it, it does not go in.
 
