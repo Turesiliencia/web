@@ -1,8 +1,8 @@
-import { ComingSoon } from "@/components/ComingSoon";
+import { HomePage } from "@/components/HomePage";
 import { homeMetadata } from "@/content/metadata";
 
 export const metadata = homeMetadata("en");
 
 export default function Home() {
-  return <ComingSoon locale="en" />;
+  return <HomePage locale="en" />;
 }

@@ -1,16 +1,12 @@
 import Image from "next/image";
-import Link from "next/link";
 import { book } from "@/content/book";
 import { home } from "@/content/home";
-import { locales, site, type Locale } from "@/content/site";
-import { LogoEmblem, LogoWordmark } from "./Logo";
-import styles from "./ComingSoon.module.css";
+import { site, type Locale } from "@/content/site";
+import { LogoEmblem } from "./Logo";
+import { SiteFooter } from "./SiteFooter";
+import { SiteHeader, sectionHref } from "./SiteHeader";
+import styles from "./HomePage.module.css";
 import cover from "@/assets/sobrevivir-no-es-reconstruirse.jpg";
-
-const languageNames: Record<Locale, string> = {
-  es: "Español",
-  en: "English",
-};
 
 // Sets each mention of the book's title in italics, in Spanish.
 function withTitle(text: string) {
@@ -26,45 +22,41 @@ function withTitle(text: string) {
   );
 }
 
-export function ComingSoon({ locale }: { locale: Locale }) {
+function mailto(subject: string) {
+  return `mailto:${site.email}?subject=${encodeURIComponent(`${subject} · ${site.name}`)}`;
+}
+
+export function HomePage({ locale }: { locale: Locale }) {
   const t = home[locale];
+  const { sections } = t;
 
   return (
     <div className={styles.page}>
-      <header className={styles.topbar}>
-        <nav aria-label={t.languageNav}>
-          <ul className={styles.languages}>
-            {locales.map((code) => (
-              <li key={code}>
-                <Link
-                  href={site.paths[code]}
-                  hrefLang={code}
-                  lang={code}
-                  aria-current={code === locale ? "page" : undefined}
-                >
-                  <span aria-hidden="true">{code.toUpperCase()}</span>
-                  <span className={styles.visuallyHidden}>
-                    {languageNames[code]}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </header>
+      <SiteHeader locale={locale} />
 
       <main>
         <section className={styles.hero}>
           <div className={styles.mark}>
             <LogoEmblem className={styles.emblem} />
           </div>
-          <LogoWordmark className={styles.wordmark} title={site.name} />
-          <p className={styles.status}>{t.status}</p>
+          <p className={styles.eyebrow}>{t.eyebrow}</p>
           <h1 className={styles.headline}>
             <span>{t.headline[0]}</span> <span>{t.headline[1]}</span>
           </h1>
           <p className={styles.subtitle}>{t.subtitle}</p>
           <p className={styles.lede}>{t.lede}</p>
+          <ul className={styles.ctas}>
+            <li>
+              <a className={styles.primary} href={sectionHref(locale, "about")}>
+                {t.cta.about}
+              </a>
+            </li>
+            <li>
+              <a className={styles.secondary} href={sectionHref(locale, "book")}>
+                {t.cta.book}
+              </a>
+            </li>
+          </ul>
         </section>
 
         <section className={styles.concept} aria-labelledby="concept">
@@ -80,10 +72,62 @@ export function ComingSoon({ locale }: { locale: Locale }) {
           <p className={styles.conceptBody}>{t.concept.body}</p>
         </section>
 
-        <section className={styles.areas} aria-labelledby="areas">
-          <h2 id="areas" className={styles.label}>
-            {t.areas.label}
-          </h2>
+        <section
+          id={sections.about.id}
+          className={styles.about}
+          aria-labelledby="about-title"
+        >
+          <div className={styles.aboutIntro}>
+            <div>
+              <p className={styles.label}>{t.about.label}</p>
+              <h2 id="about-title" className={styles.title}>
+                {t.about.title}
+              </h2>
+              {t.about.body.map((paragraph) => (
+                <p key={paragraph} className={styles.body}>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+            <dl className={styles.pillars}>
+              {t.about.pillars.map((pillar) => (
+                <div key={pillar.name}>
+                  <dt>{pillar.name}</dt>
+                  <dd>{pillar.text}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <div className={styles.fields}>
+            <h3 className={styles.label}>{t.about.fields.label}</h3>
+            <p className={styles.fieldsIntro}>{t.about.fields.intro}</p>
+            <ol>
+              {t.about.fields.items.map((field, index) => (
+                <li key={field.name}>
+                  <span className={styles.number} aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h4>{field.name}</h4>
+                  <p>{field.text}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section
+          id={sections.areas.id}
+          className={styles.areas}
+          aria-labelledby="areas-title"
+        >
+          <div className={styles.sectionHead}>
+            <p className={styles.label}>{t.areas.label}</p>
+            <h2 id="areas-title" className={styles.title}>
+              {t.areas.title}
+            </h2>
+            <p className={styles.body}>{t.areas.intro}</p>
+          </div>
           <ol className={styles.grid}>
             {t.areas.items.map((area, index) => (
               <li key={area.name} className={styles.area}>
@@ -99,12 +143,27 @@ export function ComingSoon({ locale }: { locale: Locale }) {
                     {area.firstTitle.by} {area.firstTitle.author}
                   </p>
                 )}
+                <a
+                  className={styles.areaAction}
+                  href={
+                    "subject" in area.action
+                      ? mailto(area.action.subject)
+                      : sectionHref(locale, area.action.section)
+                  }
+                >
+                  {area.action.label}
+                  <span aria-hidden="true">→</span>
+                </a>
               </li>
             ))}
           </ol>
         </section>
 
-        <section className={styles.book} aria-labelledby="book">
+        <section
+          id={sections.book.id}
+          className={styles.book}
+          aria-labelledby="book"
+        >
           <div className={styles.bookInner}>
             <Image
               className={styles.cover}
@@ -143,8 +202,13 @@ export function ComingSoon({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <section className={styles.contact} aria-labelledby="contact">
-          <h2 id="contact">{t.contact.title}</h2>
+        <section
+          id={sections.contact.id}
+          className={styles.contact}
+          aria-labelledby="contact-title"
+        >
+          <p className={styles.label}>{t.contact.label}</p>
+          <h2 id="contact-title">{t.contact.title}</h2>
           <p>{t.contact.body}</p>
           <ul className={styles.actions}>
             <li>
@@ -168,11 +232,7 @@ export function ComingSoon({ locale }: { locale: Locale }) {
         </section>
       </main>
 
-      <footer className={styles.footer}>
-        <p>
-          © 2026 {site.name} <span aria-hidden="true">·</span> {t.footer}
-        </p>
-      </footer>
+      <SiteFooter locale={locale} />
     </div>
   );
 }

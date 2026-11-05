@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Website for **TuResiliencia**, a Spanish organization centred on "Reconstrucción Humana" (publishing, training, international cooperation). It is the association's own site, at https://www.turesiliencia.org (the bare domain redirects to `www`). https://turesiliencia.com is the founder's personal site, a separate site that this project does not replace or touch.
 
-Today the site is a single "coming soon" welcome page, with a section presenting the founder's book, in Spanish at `/` and English at `/en`, live since 9 October 2026, first at https://turesiliencia.vercel.app and since November 2026 on the domain. The sections it announces (Academia, Cooperación, Alianzas, Editorial) do not exist yet. `README.md` is still the `create-next-app` boilerplate and describes none of this.
+Today the site is a single home page in Spanish at `/` and English at `/en`, live since 9 October 2026, first at https://turesiliencia.vercel.app and since November 2026 on the domain. It began as a "coming soon" page and now reads as a finished one-page site: a header with section links, the idea of Reconstrucción Humana, the association (purpose, three pillars and the six fields of action of its signed statutes), the four areas (Academia, Cooperación, Alianzas, Editorial) with a contact link each, the founder's book, contact and a footer. The areas have no pages of their own yet. `README.md` is still the `create-next-app` boilerplate and describes none of this.
 
 While the site is under construction, `baseMetadata` in `src/content/metadata.ts` sets `robots: { index: false, follow: false }` for every page. It has to be removed at launch.
 
@@ -21,17 +21,17 @@ npm run dev      # dev server on http://localhost:3000
 npm run build    # production build
 npm run start    # serve the production build
 npm run lint     # ESLint (flat config: eslint-config-next core-web-vitals + typescript)
-npx eslint src/components/ComingSoon.tsx   # lint a single file
+npx eslint src/components/HomePage.tsx     # lint a single file
 npx next typegen && npx tsc --noEmit       # type-check without building
 ```
 
 There is no test runner and no `type-check` script. Package manager is npm (`package-lock.json`).
 
-To look at a page without opening a browser, serve the build (`npx next start -p 3457`) and screenshot it with headless Chrome, at a desktop and a phone width, in both languages. The page is longer than a screen: use a tall window (about 4400 px at 1440 wide, 6800 px at 390) and crop, and give lazy-loaded images time with `--virtual-time-budget`:
+To look at a page without opening a browser, serve the build (`npx next start -p 3457`) and screenshot it with headless Chrome, at a desktop and a phone width, in both languages. The page is longer than a screen: use a tall window (about 5200 px at 1440 wide, 8600 px at 390) and crop, and give lazy-loaded images time with `--virtual-time-budget`:
 
 ```bash
 google-chrome --headless=new --hide-scrollbars --force-prefers-reduced-motion --virtual-time-budget=4000 \
-  --window-size=390,6800 --screenshot=/path/outside/the/repo/es-mobile.png http://localhost:3457/
+  --window-size=390,8600 --screenshot=/path/outside/the/repo/es-mobile.png http://localhost:3457/
 ```
 
 Stop the server by its PID afterwards (`ss -ltnp | grep 3457`). A leftover server keeps the port, the next `next start` fails with `EADDRINUSE` in its log, and the screenshots silently show the old build.
@@ -54,8 +54,9 @@ Styling is plain CSS: global tokens in `src/app/globals.css` and one CSS Module 
 
 - **Two languages, two root layouts.** There is no `src/app/layout.tsx`: `src/app/(es)/layout.tsx` (`lang="es"`, routes at `/`) and `src/app/(en)/layout.tsx` (`lang="en"`, routes under `/en`) are both root layouts, so each language gets the right `<html lang>` with fully static pages and no proxy. A page exists once per language as a thin route file that renders a shared component with a `locale` prop. Navigating between the two is a full page load, and unmatched URLs get the default Next.js 404 (a shared one needs `global-not-found`, which is experimental).
 - **Copy lives in `src/content/`**, not in components: `home.ts` holds both languages side by side, `site.ts` the site-wide constants (URL, contact, locale paths), `book.ts` the book's title, author and Amazon links, one store per language (the buy button shows only while that language's link is set), `metadata.ts` the metadata builders. The site URL is written by hand in `site.ts`; canonical, hreflang and social-card URLs derive from it.
+- **Header and footer are shared components** (`SiteHeader`, `SiteFooter`), ready for future pages. Their section links point to anchors on the home page (`/#asociacion`, `/en#about`…); the anchor ids and link labels live in `home.ts` under `sections`, one set per language. The sticky header is why `globals.css` sets `scroll-padding-top`.
 - **Design tokens** are in `src/app/globals.css`: navy and blues from the logo, gold and cream from the book cover, Cormorant Garamond for display and Montserrat (the wordmark's typeface) for text. One dark theme, no light variant.
-- **The logo is inline SVG** in `src/components/Logo.tsx`, built from the brand file: the emblem has a white underlay so its semi-transparent petals look the same on navy as on white, and the wordmark uses `currentColor`. `src/app/icon.svg`, `apple-icon.png` and `public/social-card.png` come from the same source. All of them were generated once with a throwaway script that is not in the repository: edit them by hand, or regenerate from the brand SVG if the logo changes.
+- **The logo is inline SVG** in `src/components/Logo.tsx`, built from the brand file: the emblem has a white underlay so its semi-transparent petals look the same on navy as on white, and the wordmark uses `currentColor`. The logo appears several times on a page, so each copy takes its gradient ids from `useId()`: fixed ids would collide. `src/app/icon.svg`, `apple-icon.png` and `public/social-card.png` come from the same source. All of them were generated once with a throwaway script that is not in the repository: edit them by hand, or regenerate from the brand SVG if the logo changes.
 - **Images** live in `src/assets/` and are imported statically into `next/image` (width, height and blur placeholder come from the import). The book cover there is resized from the publisher's file to 1000×1500 with its metadata stripped.
 - **Don't read the clock during render**: with `cacheComponents`, `new Date()` in a Server Component fails prerendering, which is why the footer year is literal.
 

@@ -20,53 +20,10 @@
   pointer-events: none;
 }
 
-.visuallyHidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
 .label {
   font: 600 0.75rem / 1.4 var(--font-sans);
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--gold-300);
-}
-
-/* Language switch */
-
-.topbar {
-  display: flex;
-  justify-content: flex-end;
-  padding: 1.25rem var(--gutter) 0;
-}
-
-.languages {
-  display: flex;
-  list-style: none;
-  font: 600 0.75rem / 1 var(--font-sans);
-  letter-spacing: 0.2em;
-}
-
-.languages li + li {
-  border-left: 1px solid var(--rule);
-}
-
-.languages a {
-  display: block;
-  padding: 0.7rem 0.9rem 0.7rem 1.1rem;
-  color: var(--mist);
-  transition: color 0.2s ease;
-}
-
-.languages a:hover {
-  color: var(--cream);
-}
-
-.languages a[aria-current="page"] {
   color: var(--gold-300);
 }
 
@@ -76,7 +33,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: clamp(1.5rem, 5vh, 3.5rem) var(--gutter) clamp(4.5rem, 11vh, 7.5rem);
+  padding: clamp(3rem, 8vh, 5rem) var(--gutter) clamp(4.5rem, 11vh, 7rem);
   text-align: center;
 }
 
@@ -89,6 +46,7 @@
 .hero > :nth-child(4) { animation-delay: 0.3s; }
 .hero > :nth-child(5) { animation-delay: 0.42s; }
 .hero > :nth-child(6) { animation-delay: 0.54s; }
+.hero > :nth-child(7) { animation-delay: 0.64s; }
 
 @keyframes rise {
   from {
@@ -121,26 +79,28 @@
   filter: drop-shadow(0 0.9rem 1.6rem rgb(0 0 0 / 0.45));
 }
 
-.wordmark {
-  width: clamp(11rem, 19vw, 14rem);
-  margin-top: 1.6rem;
-  color: #fff;
-}
-
-.status {
+.eyebrow {
   composes: label;
   display: flex;
   align-items: center;
   gap: 1.1rem;
-  margin-top: clamp(2.75rem, 7vh, 4.25rem);
+  margin-top: clamp(2.25rem, 5vh, 3.25rem);
 }
 
-.status::before,
-.status::after {
+.eyebrow::before,
+.eyebrow::after {
   content: "";
   width: clamp(2rem, 9vw, 5.5rem);
   height: 1px;
   background: var(--rule-strong);
+}
+
+/* On a phone the label needs the whole line. */
+@media (max-width: 29.99rem) {
+  .eyebrow::before,
+  .eyebrow::after {
+    display: none;
+  }
 }
 
 .headline {
@@ -179,6 +139,20 @@
   line-height: 1.75;
   text-wrap: pretty;
   color: var(--mist);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-top: 2.5rem;
+  list-style: none;
+}
+
+.ctas a {
+  min-width: 0;
+  padding-inline: 1.6rem;
 }
 
 /* The idea, in her words */
@@ -226,16 +200,139 @@
   color: var(--mist);
 }
 
-/* What is coming */
+/* Shared section heading: gold label, display title, body */
+
+.title {
+  margin-top: 1rem;
+  font: 600 clamp(2.1rem, 4.4vw, 3.2rem) / 1.08 var(--font-display);
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+  color: var(--cream);
+}
+
+.body {
+  max-width: 58ch;
+  margin-top: 1.25rem;
+  line-height: 1.75;
+  text-wrap: pretty;
+  color: var(--mist);
+}
+
+.sectionHead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* The association: who it is, its three pillars, the statutory fields */
+
+.about {
+  padding: clamp(4rem, 10vh, 6.5rem) var(--gutter);
+  border-top: 1px solid var(--rule);
+}
+
+.aboutIntro {
+  display: grid;
+  gap: 3rem;
+  max-width: 76rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 60rem) {
+  .aboutIntro {
+    grid-template-columns: 1.15fr 1fr;
+    gap: clamp(3rem, 7vw, 6rem);
+    align-items: start;
+  }
+}
+
+.pillars {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.pillars div {
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--rule-strong);
+}
+
+.pillars dt {
+  font: italic 500 1.75rem / 1.1 var(--font-display);
+  color: var(--gold-300);
+}
+
+.pillars dd {
+  margin-top: 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  text-wrap: pretty;
+  color: var(--mist);
+}
+
+.fields {
+  max-width: 76rem;
+  margin: clamp(3.5rem, 9vh, 5.5rem) auto 0;
+  padding-top: clamp(2.5rem, 6vh, 3.5rem);
+  border-top: 1px solid var(--rule);
+}
+
+.fieldsIntro {
+  margin-top: 0.75rem;
+  font: italic 500 1.35rem / 1.3 var(--font-display);
+  color: var(--cream);
+}
+
+.fields ol {
+  display: grid;
+  gap: 2rem clamp(1.5rem, 3vw, 2.75rem);
+  margin-top: 2.25rem;
+  list-style: none;
+}
+
+@media (min-width: 40rem) {
+  .fields ol {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 68rem) {
+  .fields ol {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.fields li {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  column-gap: 0.5rem;
+  align-content: start;
+}
+
+.fields .number {
+  padding-top: 0.15rem;
+}
+
+.fields h4 {
+  font: 600 1.3rem / 1.2 var(--font-display);
+  color: var(--cream);
+}
+
+.fields li p {
+  grid-column: 2;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  text-wrap: pretty;
+  color: var(--mist);
+}
+
+/* The four areas */
 
 .areas {
   padding: clamp(4rem, 10vh, 6.5rem) var(--gutter);
   border-top: 1px solid var(--rule);
   background: linear-gradient(180deg, rgb(8 22 48 / 0.7), transparent);
-}
-
-.areas .label {
-  text-align: center;
 }
 
 .grid {
@@ -259,6 +356,8 @@
 }
 
 .area {
+  display: flex;
+  flex-direction: column;
   padding-top: 1.4rem;
   border-top: 1px solid var(--rule-strong);
 }
@@ -304,6 +403,33 @@
   display: block;
   margin: 0.35rem 0 0.1rem;
   font: italic 500 1.4rem / 1.2 var(--font-display);
+}
+
+.areaAction {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+
+.areaAction span {
+  font: 400 1.1rem / 1 system-ui, sans-serif;
+  transition: transform 0.2s ease;
+}
+
+.areaAction:hover {
+  color: #ecd9ac;
+}
+
+.areaAction:hover span {
+  transform: translateX(0.25rem);
 }
 
 /* The book */
@@ -416,11 +542,12 @@
 }
 
 .contact h2 {
+  margin-top: 1rem;
   font: italic 500 clamp(2rem, 4vw, 2.75rem) / 1.15 var(--font-display);
   color: var(--cream);
 }
 
-.contact > p {
+.contact > p:not(.label) {
   max-width: 52ch;
   margin-top: 1.25rem;
   line-height: 1.75;
@@ -483,25 +610,12 @@
   background: rgb(215 186 127 / 0.1);
 }
 
-/* Footer */
-
-.footer {
-  margin-top: auto;
-  padding: 1.75rem var(--gutter) 2rem;
-  border-top: 1px solid var(--rule);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-align: center;
-  color: var(--mist);
-}
-
-.footer span {
-  margin-inline: 0.5em;
-  color: var(--gold-300);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hero > * {
     animation: none;
+  }
+
+  .areaAction span {
+    transition: none;
   }
 }

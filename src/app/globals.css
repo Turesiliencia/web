@@ -26,8 +26,22 @@
 }
 
 html {
+  /* Room for the sticky header when jumping to a section. */
+  scroll-padding-top: 7rem;
   background: var(--navy-950);
   -webkit-text-size-adjust: 100%;
+}
+
+@media (min-width: 60rem) {
+  html {
+    scroll-padding-top: 5.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {

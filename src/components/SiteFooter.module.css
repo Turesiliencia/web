@@ -1,0 +1,104 @@
+.footer {
+  margin-top: auto;
+  border-top: 1px solid var(--rule);
+  background: var(--navy-900);
+}
+
+.inner {
+  display: grid;
+  gap: 2.5rem;
+  max-width: calc(76rem + 2 * var(--gutter));
+  margin-inline: auto;
+  padding: clamp(3rem, 7vh, 4.5rem) var(--gutter) 2.5rem;
+}
+
+@media (min-width: 40rem) {
+  .inner {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .about {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 60rem) {
+  .inner {
+    grid-template-columns: 1.7fr 1fr 1.4fr auto;
+  }
+
+  .about {
+    grid-column: auto;
+  }
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: #fff;
+}
+
+.emblem {
+  width: 3rem;
+}
+
+.wordmark {
+  width: 10rem;
+}
+
+.tagline {
+  margin-top: 1.25rem;
+  font: italic 500 1.35rem / 1.3 var(--font-display);
+  color: var(--cream);
+}
+
+.kind {
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--mist);
+}
+
+.column h2 {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+
+.column ul {
+  margin-top: 1rem;
+  list-style: none;
+}
+
+.column > ul li + li {
+  margin-top: 0.55rem;
+}
+
+.column > ul a {
+  font-size: 0.875rem;
+  color: var(--mist);
+  overflow-wrap: break-word;
+  transition: color 0.2s ease;
+}
+
+.column > ul a:hover {
+  color: var(--cream);
+}
+
+/* The language switch keeps its own look, shifted to line up with the column. */
+.column nav ul {
+  margin-left: -0.95rem;
+}
+
+.legal {
+  width: calc(100% - 2 * var(--gutter));
+  max-width: 76rem;
+  margin-inline: auto;
+  padding: 1.5rem 0 2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--mist);
+}
