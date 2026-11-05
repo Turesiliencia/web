@@ -27,12 +27,14 @@ npx next typegen && npx tsc --noEmit       # type-check without building
 
 There is no test runner and no `type-check` script. Package manager is npm (`package-lock.json`).
 
-To look at a page without opening a browser, serve the build (`npx next start -p 3457`) and screenshot it with headless Chrome, at a desktop and a phone width, in both languages:
+To look at a page without opening a browser, serve the build (`npx next start -p 3457`) and screenshot it with headless Chrome, at a desktop and a phone width, in both languages. The page is longer than a screen: use a tall window (about 4400 px at 1440 wide, 6800 px at 390) and crop, and give lazy-loaded images time with `--virtual-time-budget`:
 
 ```bash
-google-chrome --headless=new --hide-scrollbars --force-prefers-reduced-motion \
-  --window-size=390,844 --screenshot=/path/outside/the/repo/es-mobile.png http://localhost:3457/
+google-chrome --headless=new --hide-scrollbars --force-prefers-reduced-motion --virtual-time-budget=4000 \
+  --window-size=390,6800 --screenshot=/path/outside/the/repo/es-mobile.png http://localhost:3457/
 ```
+
+Stop the server by its PID afterwards (`ss -ltnp | grep 3457`). A leftover server keeps the port, the next `next start` fails with `EADDRINUSE` in its log, and the screenshots silently show the old build.
 
 ## Stack and configuration
 
@@ -51,9 +53,10 @@ Styling is plain CSS: global tokens in `src/app/globals.css` and one CSS Module 
 ## Architecture
 
 - **Two languages, two root layouts.** There is no `src/app/layout.tsx`: `src/app/(es)/layout.tsx` (`lang="es"`, routes at `/`) and `src/app/(en)/layout.tsx` (`lang="en"`, routes under `/en`) are both root layouts, so each language gets the right `<html lang>` with fully static pages and no proxy. A page exists once per language as a thin route file that renders a shared component with a `locale` prop. Navigating between the two is a full page load, and unmatched URLs get the default Next.js 404 (a shared one needs `global-not-found`, which is experimental).
-- **Copy lives in `src/content/`**, not in components: `home.ts` holds both languages side by side, `site.ts` the site-wide constants (URL, contact, locale paths), `book.ts` the book's title, author and Amazon link (the buy button shows only once `amazonUrl` is set), `metadata.ts` the metadata builders. The site URL is written by hand in `site.ts`; canonical, hreflang and social-card URLs derive from it.
+- **Copy lives in `src/content/`**, not in components: `home.ts` holds both languages side by side, `site.ts` the site-wide constants (URL, contact, locale paths), `book.ts` the book's title, author and Amazon link (the buy button shows only while `amazonUrl` is set), `metadata.ts` the metadata builders. The site URL is written by hand in `site.ts`; canonical, hreflang and social-card URLs derive from it.
 - **Design tokens** are in `src/app/globals.css`: navy and blues from the logo, gold and cream from the book cover, Cormorant Garamond for display and Montserrat (the wordmark's typeface) for text. One dark theme, no light variant.
 - **The logo is inline SVG** in `src/components/Logo.tsx`, built from the brand file: the emblem has a white underlay so its semi-transparent petals look the same on navy as on white, and the wordmark uses `currentColor`. `src/app/icon.svg`, `apple-icon.png` and `public/social-card.png` come from the same source. All of them were generated once with a throwaway script that is not in the repository: edit them by hand, or regenerate from the brand SVG if the logo changes.
+- **Images** live in `src/assets/` and are imported statically into `next/image` (width, height and blur placeholder come from the import). The book cover there is resized from the publisher's file to 1000×1500 with its metadata stripped.
 - **Don't read the clock during render**: with `cacheComponents`, `new Date()` in a Server Component fails prerendering, which is why the footer year is literal.
 
 ## Git and what can be committed
@@ -69,7 +72,7 @@ gh api repos/Turesiliencia/web/commits/<sha>/status \
 
 Never committed:
 
-- `refs/`, `CLAUDE.local.md` and `.env*` (all gitignored), nor anything copied or paraphrased from them into tracked files, commit messages or code comments.
+- `refs/`, `CLAUDE.local.md` and `.env*` (all gitignored), nor anything copied or paraphrased from them into tracked files, commit messages or code comments. The exception is material the organization asked to publish, such as the book's cover and description: `CLAUDE.local.md` says which.
 - Internal documents, plans, pricing, correspondence, legal paperwork, or personal data of anyone.
 - Account identifiers, screenshots or settings of the organization's hosting, domain, mail or payment accounts.
 
