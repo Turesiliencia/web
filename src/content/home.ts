@@ -62,7 +62,7 @@ export const home: Record<Locale, HomeContent> = {
     meta: {
       title: "TuResiliencia · Reconstrucción Humana",
       description:
-        "TuResiliencia es una asociación sin ánimo de lucro dedicada a la Reconstrucción Humana: formación, investigación, publicaciones, cooperación y alianzas.",
+        "Asociación sin ánimo de lucro dedicada a la Reconstrucción Humana: formación, investigación, publicaciones y cooperación. Novedad editorial: Sobrevivir no es reconstruirse, de Deissy Olarte.",
     },
     languageNav: "Idioma",
     mainNav: "Principal",
@@ -205,7 +205,7 @@ export const home: Record<Locale, HomeContent> = {
     meta: {
       title: "TuResiliencia · Human Reconstruction",
       description:
-        "TuResiliencia is a non-profit association devoted to Human Reconstruction: training, research, publications, cooperation and partnerships.",
+        "A non-profit association devoted to Human Reconstruction: training, research, publications and cooperation. New book: Sobrevivir no es reconstruirse, by Deissy Olarte.",
     },
     languageNav: "Language",
     mainNav: "Main",

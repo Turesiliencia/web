@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { book } from "./book";
 import { home } from "./home";
 import { site, type Locale } from "./site";
 
@@ -13,12 +14,13 @@ export const baseMetadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// public/social-card.png: ring, emblem and wordmark, as in the hero.
+// public/social-card-book.png: logo, the book's title and author, and its cover.
+// No words in either language, so both pages share it.
 const socialCard = {
-  url: "/social-card.png",
+  url: "/social-card-book.png",
   width: 1200,
   height: 630,
-  alt: site.name,
+  alt: `${site.name} · ${book.title}, ${book.author}`,
 };
 
 export function homeMetadata(locale: Locale): Metadata {
