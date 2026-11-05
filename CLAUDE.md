@@ -6,9 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project state
 
-Website for **TuResiliencia**, a Spanish organization centred on "Reconstrucción Humana" (publishing, training, international cooperation). It is the association's own site and will move to a domain of its own. https://turesiliencia.com is the founder's personal site, a separate site that this project does not replace or touch.
+Website for **TuResiliencia**, a Spanish organization centred on "Reconstrucción Humana" (publishing, training, international cooperation). It is the association's own site, at https://www.turesiliencia.org (the bare domain redirects to `www`). https://turesiliencia.com is the founder's personal site, a separate site that this project does not replace or touch.
 
-Today the site is a single "coming soon" welcome page, in Spanish at `/` and English at `/en`, live at https://turesiliencia.vercel.app since 9 October 2026. The sections it announces (Academia, Cooperación, Alianzas, Editorial) do not exist yet. `README.md` is still the `create-next-app` boilerplate and describes none of this.
+Today the site is a single "coming soon" welcome page, in Spanish at `/` and English at `/en`, live since 9 October 2026, first at https://turesiliencia.vercel.app and since November 2026 on the domain. The sections it announces (Academia, Cooperación, Alianzas, Editorial) do not exist yet. `README.md` is still the `create-next-app` boilerplate and describes none of this.
 
 While the site is under construction, `baseMetadata` in `src/content/metadata.ts` sets `robots: { index: false, follow: false }` for every page. It has to be removed at launch.
 

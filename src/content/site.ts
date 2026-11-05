@@ -4,7 +4,7 @@ export type Locale = (typeof locales)[number];
 export const site = {
   name: "TuResiliencia",
   // Written by hand: canonical URLs, hreflang and social cards are built from it.
-  url: "https://turesiliencia.vercel.app",
+  url: "https://www.turesiliencia.org",
   email: "turesiliencia.com@gmail.com",
   instagram: {
     handle: "@turesiliencia_",
