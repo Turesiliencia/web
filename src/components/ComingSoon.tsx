@@ -129,10 +129,10 @@ export function ComingSoon({ locale }: { locale: Locale }) {
                 </p>
               ))}
               {t.book.note && <p className={styles.bookNote}>{t.book.note}</p>}
-              {book.amazonUrl && (
+              {book.amazonUrl[locale] && (
                 <a
                   className={`${styles.primary} ${styles.buy}`}
-                  href={book.amazonUrl}
+                  href={book.amazonUrl[locale]}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
