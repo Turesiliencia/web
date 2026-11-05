@@ -306,6 +306,103 @@
   font: italic 500 1.4rem / 1.2 var(--font-display);
 }
 
+/* The book */
+
+.book {
+  padding: clamp(4rem, 10vh, 6.5rem) var(--gutter);
+  border-top: 1px solid var(--rule);
+}
+
+.bookInner {
+  display: grid;
+  justify-items: center;
+  gap: 2.75rem;
+  max-width: 62rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 52rem) {
+  .bookInner {
+    grid-template-columns: 20rem 1fr;
+    align-items: start;
+    justify-items: stretch;
+    gap: clamp(3rem, 6vw, 5rem);
+  }
+}
+
+.cover {
+  width: min(16rem, 100%);
+  height: auto;
+  box-shadow:
+    0 1.5rem 3rem rgb(0 0 0 / 0.5),
+    0 0 0 1px rgb(215 186 127 / 0.25);
+}
+
+@media (min-width: 52rem) {
+  .cover {
+    width: 100%;
+  }
+}
+
+.bookText {
+  max-width: 38rem;
+}
+
+.bookTitle {
+  margin-top: 1.25rem;
+}
+
+.bookTitle cite {
+  display: block;
+  font: 600 clamp(2rem, 4.2vw, 3rem) / 1.08 var(--font-display);
+  letter-spacing: 0.02em;
+  text-wrap: balance;
+  color: var(--cream);
+}
+
+.bookTitle span {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+
+.bookBody {
+  margin-top: 1.25rem;
+  line-height: 1.75;
+  text-wrap: pretty;
+  color: var(--mist);
+}
+
+.bookTitle + .bookBody {
+  margin-top: 2rem;
+  font: italic 500 1.5rem / 1.35 var(--font-display);
+  color: var(--cream);
+}
+
+.bookBody cite {
+  font-style: italic;
+  color: var(--cream);
+}
+
+.bookNote {
+  margin-top: 1.75rem;
+  padding-left: 0.9rem;
+  border-left: 1px solid var(--rule-strong);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--mist);
+}
+
+.buy {
+  display: inline-flex;
+  min-width: 0;
+  margin-top: 2rem;
+}
+
 /* Contact */
 
 .contact {

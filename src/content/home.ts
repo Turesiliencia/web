@@ -16,6 +16,15 @@ export type HomeContent = {
   lede: string;
   concept: { label: string; quote: string; body: string; attribution: string };
   areas: { label: string; items: Area[] };
+  book: {
+    label: string;
+    by: string;
+    coverAlt: string;
+    // Every mention of the title is set in italics.
+    paragraphs: string[];
+    note?: string;
+    buy: string;
+  };
   contact: { title: string; body: string; email: string; instagram: string };
   footer: string;
 };
@@ -68,6 +77,19 @@ export const home: Record<Locale, HomeContent> = {
           },
         },
       ],
+    },
+    book: {
+      label: "Novedad editorial",
+      by: "de",
+      coverAlt:
+        "Portada de Sobrevivir no es reconstruirse, de Deissy Olarte: dos figuras de piedra con grietas doradas, sentadas espalda con espalda dentro de un círculo dorado.",
+      paragraphs: [
+        "Después de una pérdida, todo el mundo pregunta cómo seguir adelante. Casi nadie pregunta qué le ocurre realmente a la persona que lo intenta.",
+        "Sobrevivir no es reconstruirse no es un manual de superación ni una guía para «sentirse bien». Es una invitación a mirar de frente lo que el duelo transforma por dentro: la identidad, el cuerpo, los vínculos, la dignidad y la propia idea de futuro.",
+        "Desde su investigación y su trabajo en torno al duelo, Deissy Olarte plantea una diferencia esencial: seguir funcionando no significa estar bien. Sobrevivir puede ser apenas el primer paso de una historia que todavía no sabemos cómo contar.",
+        "Este libro no ofrece respuestas fáciles. Abre preguntas y acompaña la posibilidad de volver a reconocerse después de lo vivido.",
+      ],
+      buy: "Comprar en Amazon",
     },
     contact: {
       title: "Mientras tanto",
@@ -124,6 +146,20 @@ export const home: Record<Locale, HomeContent> = {
           },
         },
       ],
+    },
+    book: {
+      label: "New book",
+      by: "by",
+      coverAlt:
+        "Cover of Sobrevivir no es reconstruirse by Deissy Olarte: two stone figures with golden cracks, sitting back to back inside a golden circle.",
+      paragraphs: [
+        "After a loss, everyone asks how to move on. Almost no one asks what is really happening to the person who is trying.",
+        "Sobrevivir no es reconstruirse is neither a self-help manual nor a guide to “feeling good”. It is an invitation to look squarely at what grief transforms within: identity, the body, bonds, dignity and the very idea of a future.",
+        "Drawing on her research and her work on grief, Deissy Olarte makes an essential distinction: to keep functioning is not to be well. Surviving may be only the first step of a story we do not yet know how to tell.",
+        "This book offers no easy answers. It opens questions, and it stays with the possibility of recognising oneself again after what one has lived through.",
+      ],
+      note: "Published in Spanish. The title means “Surviving is not rebuilding yourself”.",
+      buy: "Buy on Amazon",
     },
     contact: {
       title: "In the meantime",

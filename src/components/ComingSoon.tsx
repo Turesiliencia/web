@@ -1,13 +1,30 @@
+import Image from "next/image";
 import Link from "next/link";
+import { book } from "@/content/book";
 import { home } from "@/content/home";
 import { locales, site, type Locale } from "@/content/site";
 import { LogoEmblem, LogoWordmark } from "./Logo";
 import styles from "./ComingSoon.module.css";
+import cover from "@/assets/sobrevivir-no-es-reconstruirse.jpg";
 
 const languageNames: Record<Locale, string> = {
   es: "Español",
   en: "English",
 };
+
+// Sets each mention of the book's title in italics, in Spanish.
+function withTitle(text: string) {
+  return text.split(book.title).flatMap((part, index) =>
+    index === 0
+      ? [part]
+      : [
+          <cite key={index} lang="es">
+            {book.title}
+          </cite>,
+          part,
+        ],
+  );
+}
 
 export function ComingSoon({ locale }: { locale: Locale }) {
   const t = home[locale];
@@ -85,6 +102,45 @@ export function ComingSoon({ locale }: { locale: Locale }) {
               </li>
             ))}
           </ol>
+        </section>
+
+        <section className={styles.book} aria-labelledby="book">
+          <div className={styles.bookInner}>
+            <Image
+              className={styles.cover}
+              src={cover}
+              alt={t.book.coverAlt}
+              sizes="(min-width: 52rem) 20rem, 16rem"
+              placeholder="blur"
+            />
+            <div className={styles.bookText}>
+              <h2 id="book" className={styles.label}>
+                {t.book.label}
+              </h2>
+              <p className={styles.bookTitle}>
+                <cite lang="es">{book.title}</cite>
+                <span>
+                  {t.book.by} {book.author}
+                </span>
+              </p>
+              {t.book.paragraphs.map((paragraph) => (
+                <p key={paragraph} className={styles.bookBody}>
+                  {withTitle(paragraph)}
+                </p>
+              ))}
+              {t.book.note && <p className={styles.bookNote}>{t.book.note}</p>}
+              {book.amazonUrl && (
+                <a
+                  className={`${styles.primary} ${styles.buy}`}
+                  href={book.amazonUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t.book.buy}
+                </a>
+              )}
+            </div>
+          </div>
         </section>
 
         <section className={styles.contact} aria-labelledby="contact">
