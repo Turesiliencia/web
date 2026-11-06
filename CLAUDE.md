@@ -12,7 +12,7 @@ Today the site is a single home page in Spanish at `/` and English at `/en`, liv
 
 While the site is under construction, `baseMetadata` in `src/content/metadata.ts` sets `robots: { index: false, follow: false }` for every page. It has to be removed at launch.
 
-The brief, the source material and the account details are not in the repository. They live in `CLAUDE.local.md` and `refs/`, both gitignored: when they exist, read `CLAUDE.local.md` before designing or writing content.
+The brief, the source material and the account details are not in the repository. They live in `CLAUDE.local.md` and `refs/`, both gitignored: when they exist, read `CLAUDE.local.md` before designing or writing content. Git does not carry them, so on a new machine they have to be copied over by hand from the previous one; if they are missing, ask before writing content.
 
 ## Commands
 
@@ -57,6 +57,7 @@ Styling is plain CSS: global tokens in `src/app/globals.css` and one CSS Module 
 - **Header and footer are shared components** (`SiteHeader`, `SiteFooter`), ready for future pages. Their section links point to anchors on the home page (`/#asociacion`, `/en#about`…); the anchor ids and link labels live in `home.ts` under `sections`, one set per language. The sticky header is why `globals.css` sets `scroll-padding-top`.
 - **Design tokens** are in `src/app/globals.css`: navy and blues from the logo, gold and cream from the book cover, Cormorant Garamond for display and Montserrat (the wordmark's typeface) for text. One dark theme, no light variant.
 - **The logo is inline SVG** in `src/components/Logo.tsx`, built from the brand file: the emblem has a white underlay so its semi-transparent petals look the same on navy as on white, and the wordmark uses `currentColor`. The logo appears several times on a page, so each copy takes its gradient ids from `useId()`: fixed ids would collide. `src/app/icon.svg` and `apple-icon.png` come from the same source. All of them were generated once with a throwaway script that is not in the repository: edit them by hand, or regenerate from the brand SVG if the logo changes.
+- **The Amazon icon** on the book's buy button is inline SVG in `src/components/AmazonIcon.tsx`, the Amazon mark from Simple Icons (CC0), drawn in `currentColor` and hidden from screen readers since the link text names the store.
 - **Images** live in `src/assets/` and are imported statically into `next/image` (width, height and blur placeholder come from the import). The book cover there is resized from the publisher's file to 1000×1500 with its metadata stripped.
 - **The link preview** (`public/social-card-book.png`, 1200×630) shows the logo, the book's title and author, and its cover, with no words in either language so both pages share it. It was rendered once from a throwaway HTML page with headless Chrome at 1200×630; redo it the same way if the book or the logo changes, and give it a new file name, since apps cache link previews.
 - **Don't read the clock during render**: with `cacheComponents`, `new Date()` in a Server Component fails prerendering, which is why the footer year is literal.

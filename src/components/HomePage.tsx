@@ -2,6 +2,7 @@ import Image from "next/image";
 import { book } from "@/content/book";
 import { home } from "@/content/home";
 import { site, type Locale } from "@/content/site";
+import { AmazonIcon } from "./AmazonIcon";
 import { LogoEmblem } from "./Logo";
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader, sectionHref } from "./SiteHeader";
@@ -195,6 +196,7 @@ export function HomePage({ locale }: { locale: Locale }) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
+                  <AmazonIcon className={styles.buyIcon} />
                   {t.book.buy}
                 </a>
               )}
