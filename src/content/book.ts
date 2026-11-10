@@ -11,4 +11,10 @@ export const book = {
     es: "https://www.amazon.es/dp/B0HQ1SSMKB",
     en: "https://www.amazon.co.uk/dp/B0HQ1SSMKB",
   } as Record<Locale, string | null>,
+  // A second store, in a line under the button, for readers the first one
+  // doesn't serve: Latin America buys from amazon.com. Shown only while set.
+  otherStoreUrl: {
+    es: "https://www.amazon.com/dp/B0HQ1SSMKB",
+    en: null,
+  } as Record<Locale, string | null>,
 };

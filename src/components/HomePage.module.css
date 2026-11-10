@@ -539,6 +539,23 @@
   height: 1.4rem;
 }
 
+.otherStore {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--mist);
+}
+
+.otherStore a {
+  color: var(--gold-300);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.otherStore a:hover {
+  color: #e6cf9c;
+}
+
 /* Contact */
 
 .contact {

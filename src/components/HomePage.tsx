@@ -200,6 +200,18 @@ export function HomePage({ locale }: { locale: Locale }) {
                   {t.book.buy}
                 </a>
               )}
+              {book.otherStoreUrl[locale] && t.book.otherStore && (
+                <p className={styles.otherStore}>
+                  {t.book.otherStore.question}{" "}
+                  <a
+                    href={book.otherStoreUrl[locale]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {t.book.otherStore.link}
+                  </a>
+                </p>
+              )}
             </div>
           </div>
         </section>

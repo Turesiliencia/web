@@ -40,6 +40,8 @@ export type HomeContent = {
     paragraphs: string[];
     note?: string;
     buy: string;
+    // The line under the button that points to book.otherStoreUrl.
+    otherStore?: { question: string; link: string };
   };
   contact: {
     label: string;
@@ -185,6 +187,7 @@ export const home: Record<Locale, HomeContent> = {
         "Este libro no ofrece respuestas fáciles. Abre preguntas y acompaña la posibilidad de volver a reconocerse después de lo vivido.",
       ],
       buy: "Comprar en Amazon",
+      otherStore: { question: "¿Estás en Latinoamérica?", link: "Cómpralo en Amazon.com" },
     },
     contact: {
       label: "Contacto",
