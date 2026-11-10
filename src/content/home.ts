@@ -232,7 +232,7 @@ export const home: Record<Locale, HomeContent> = {
       book: { id: "publishing", nav: "Publishing" },
       contact: { id: "contact", nav: "Contact" },
     },
-    eyebrow: "Non-profit association",
+    eyebrow: "TuResiliencia Association",
     headline: ["Rebuilding lives", "Transforming realities"],
     subtitle:
       "Knowledge, dignity and innovation in the service of Human Reconstruction",
