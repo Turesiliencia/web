@@ -1,0 +1,73 @@
+/* The home page's hero, cut down to a message and a way back. */
+
+.page {
+  composes: page from "./HomePage.module.css";
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(3rem, 10vh, 6rem) var(--gutter) clamp(4rem, 12vh, 7rem);
+  text-align: center;
+}
+
+.mark {
+  composes: mark from "./HomePage.module.css";
+  width: clamp(7rem, 15vw, 9rem);
+}
+
+.emblem {
+  composes: emblem from "./HomePage.module.css";
+}
+
+.label {
+  composes: eyebrow from "./HomePage.module.css";
+}
+
+.heading {
+  composes: headline from "./HomePage.module.css";
+  font-size: clamp(2rem, 5vw, 3.4rem);
+}
+
+.body {
+  composes: lede from "./HomePage.module.css";
+  max-width: 46ch;
+  margin-top: 1.5rem;
+}
+
+.home {
+  composes: primary from "./HomePage.module.css";
+  min-width: 0;
+  margin-top: 2.5rem;
+  padding-inline: 1.6rem;
+}
+
+.english {
+  max-width: 46ch;
+  margin-top: 2.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  text-wrap: pretty;
+  color: var(--mist);
+}
+
+.english strong {
+  font-weight: 600;
+  color: var(--cream);
+}
+
+.english a {
+  color: var(--gold-300);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.english a:hover {
+  color: #e6cf9c;
+}
