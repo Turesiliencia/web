@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Website for **TuResiliencia**, a Spanish organization centred on "Reconstrucción Humana" (publishing, training, international cooperation). It is the association's own site, at https://www.turesiliencia.org (the bare domain redirects to `www`). https://turesiliencia.com is the founder's personal site, a separate site that this project does not replace or touch.
 
-Today the site is a single home page in Spanish at `/` and English at `/en`, live since 9 October 2026, first at https://turesiliencia.vercel.app and since November 2026 on the domain. It began as a "coming soon" page and now reads as a finished one-page site: a header with section links, the idea of Reconstrucción Humana, the association (purpose, three pillars and the six fields of action of its signed statutes), the four areas (Academia, Cooperación, Alianzas, Editorial) with a contact link each, the founder's book, contact and a footer. The areas have no pages of their own yet. `README.md` is still the `create-next-app` boilerplate and describes none of this.
+Today the site is a single home page in Spanish at `/` and English at `/en`, live since 9 October 2026, first at https://turesiliencia.vercel.app and since November 2026 on the domain. It began as a "coming soon" page and now reads as a finished one-page site: a header with section links, the idea of Reconstrucción Humana, the association (purpose, three pillars and the six fields of action of its signed statutes), the four areas (Academia, Cooperación, Alianzas, Editorial) with a contact link each, the founder's book (front and back cover, Amazon links), contact and a footer. Unknown addresses get a 404 page in the site's design. The areas have no pages of their own yet. `README.md` is still the `create-next-app` boilerplate and describes none of this.
 
 While the site is under construction, `baseMetadata` in `src/content/metadata.ts` sets `robots: { index: false, follow: false }` for every page. It has to be removed at launch.
 
@@ -33,6 +33,8 @@ To look at a page without opening a browser, serve the build (`npx next start -p
 google-chrome --headless=new --hide-scrollbars --force-prefers-reduced-motion --virtual-time-budget=4000 \
   --window-size=390,8600 --screenshot=/path/outside/the/repo/es-mobile.png http://localhost:3457/
 ```
+
+A screenshot can't click. To test something interactive, such as the dots under the book covers, drive headless Chrome over the DevTools protocol: start it with `--remote-debugging-port=9333 --remote-allow-origins=http://127.0.0.1:9333`, then a short Python script (`uv run --no-project --with websocket-client`) navigates, runs JavaScript to click, reads state and takes screenshots. Don't stop such a Chrome with `pkill -f` on its flags: the pattern also matches the shell running the command and kills it.
 
 Stop the server by its PID afterwards (`ss -ltnp | grep 3457`). A leftover server keeps the port, the next `next start` fails with `EADDRINUSE` in its log, and the screenshots silently show the old build.
 
@@ -94,4 +96,4 @@ git diff --cached --name-only | grep -Ei '^refs/|CLAUDE\.local|\.env|\.(pem|key|
 git diff --cached | grep -Ei 'token|secret|password|api[_-]?key|BEGIN .*PRIVATE'
 ```
 
-If either prints anything, stop and look.
+If either prints anything, stop and look. The second one also matches "Design tokens" in this file whenever `CLAUDE.md` is staged: that hit is expected.
