@@ -1,0 +1,79 @@
+.gallery {
+  width: min(16rem, 100%);
+}
+
+@media (min-width: 52rem) {
+  .gallery {
+    width: 100%;
+  }
+}
+
+/* One cover wide; the strip scrolls sideways and snaps to each cover. */
+.track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  box-shadow:
+    0 1.5rem 3rem rgb(0 0 0 / 0.5),
+    0 0 0 1px rgb(215 186 127 / 0.25);
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .track {
+    scroll-behavior: smooth;
+  }
+}
+
+.slide {
+  width: 100%;
+  height: auto;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-top: 1rem;
+}
+
+/* A small dot inside a button big enough to tap. */
+.dot {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.dot::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 1px solid var(--gold-300);
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.dot[aria-current="true"]::before {
+  background: var(--gold-300);
+}
+
+.dot:hover::before {
+  background: rgb(215 186 127 / 0.5);
+}
+
+.dot[aria-current="true"]:hover::before {
+  background: var(--gold-300);
+}

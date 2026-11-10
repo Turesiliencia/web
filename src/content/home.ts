@@ -35,7 +35,12 @@ export type HomeContent = {
   book: {
     label: string;
     by: string;
-    coverAlt: string;
+    // Front and back cover, one at a time, with a dot for each.
+    gallery: {
+      label: string;
+      front: { name: string; alt: string };
+      back: { name: string; alt: string };
+    };
     // Every mention of the title is set in italics.
     paragraphs: string[];
     note?: string;
@@ -74,7 +79,7 @@ export const home: Record<Locale, HomeContent> = {
       book: { id: "editorial", nav: "Editorial" },
       contact: { id: "contacto", nav: "Contacto" },
     },
-    eyebrow: "Asociación sin ánimo de lucro",
+    eyebrow: "Asociación TuResiliencia",
     headline: ["Reconstruir vidas", "Transformar realidades"],
     subtitle:
       "Conocimiento, dignidad e innovación al servicio de la Reconstrucción Humana",
@@ -178,8 +183,17 @@ export const home: Record<Locale, HomeContent> = {
     book: {
       label: "Novedad editorial",
       by: "de",
-      coverAlt:
-        "Portada de Sobrevivir no es reconstruirse, de Deissy Olarte: dos figuras de piedra con grietas doradas, sentadas espalda con espalda dentro de un círculo dorado.",
+      gallery: {
+        label: "Imágenes del libro",
+        front: {
+          name: "Portada",
+          alt: "Portada de Sobrevivir no es reconstruirse, de Deissy Olarte: dos figuras de piedra con grietas doradas, sentadas espalda con espalda dentro de un círculo dorado.",
+        },
+        back: {
+          name: "Contraportada",
+          alt: "Contraportada de Sobrevivir no es reconstruirse. Arriba, la pregunta «¿Y si “ser fuerte” fuera precisamente lo que nos impide reconstruirnos?»; debajo, el texto de presentación de la autora.",
+        },
+      },
       paragraphs: [
         "Después de una pérdida, todo el mundo pregunta cómo seguir adelante. Casi nadie pregunta qué le ocurre realmente a la persona que lo intenta.",
         "Sobrevivir no es reconstruirse no es un manual de superación ni una guía para «sentirse bien». Es una invitación a mirar de frente lo que el duelo transforma por dentro: la identidad, el cuerpo, los vínculos, la dignidad y la propia idea de futuro.",
@@ -322,8 +336,17 @@ export const home: Record<Locale, HomeContent> = {
     book: {
       label: "New book",
       by: "by",
-      coverAlt:
-        "Cover of Sobrevivir no es reconstruirse by Deissy Olarte: two stone figures with golden cracks, sitting back to back inside a golden circle.",
+      gallery: {
+        label: "Book images",
+        front: {
+          name: "Front cover",
+          alt: "Cover of Sobrevivir no es reconstruirse by Deissy Olarte: two stone figures with golden cracks, sitting back to back inside a golden circle.",
+        },
+        back: {
+          name: "Back cover",
+          alt: "Back cover of Sobrevivir no es reconstruirse, in Spanish. At the top, the question “What if ‘being strong’ were precisely what keeps us from rebuilding ourselves?”; below it, the author’s presentation of the book.",
+        },
+      },
       paragraphs: [
         "After a loss, everyone asks how to move on. Almost no one asks what is really happening to the person who is trying.",
         "Sobrevivir no es reconstruirse is neither a self-help manual nor a guide to “feeling good”. It is an invitation to look squarely at what grief transforms within: identity, the body, bonds, dignity and the very idea of a future.",
@@ -332,6 +355,7 @@ export const home: Record<Locale, HomeContent> = {
       ],
       note: "Published in Spanish. The title means “Surviving is not rebuilding yourself”.",
       buy: "Buy on Amazon",
+      otherStore: { question: "In the US?", link: "Buy it on Amazon.com" },
     },
     contact: {
       label: "Contact",

@@ -1,13 +1,12 @@
-import Image from "next/image";
 import { book } from "@/content/book";
 import { home } from "@/content/home";
 import { site, type Locale } from "@/content/site";
 import { AmazonIcon } from "./AmazonIcon";
+import { BookGallery } from "./BookGallery";
 import { LogoEmblem } from "./Logo";
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader, sectionHref } from "./SiteHeader";
 import styles from "./HomePage.module.css";
-import cover from "@/assets/sobrevivir-no-es-reconstruirse.jpg";
 
 // Sets each mention of the book's title in italics, in Spanish.
 function withTitle(text: string) {
@@ -166,13 +165,7 @@ export function HomePage({ locale }: { locale: Locale }) {
           aria-labelledby="book"
         >
           <div className={styles.bookInner}>
-            <Image
-              className={styles.cover}
-              src={cover}
-              alt={t.book.coverAlt}
-              sizes="(min-width: 52rem) 20rem, 16rem"
-              placeholder="blur"
-            />
+            <BookGallery labels={t.book.gallery} />
             <div className={styles.bookText}>
               <h2 id="book" className={styles.label}>
                 {t.book.label}

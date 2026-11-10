@@ -456,20 +456,6 @@
   }
 }
 
-.cover {
-  width: min(16rem, 100%);
-  height: auto;
-  box-shadow:
-    0 1.5rem 3rem rgb(0 0 0 / 0.5),
-    0 0 0 1px rgb(215 186 127 / 0.25);
-}
-
-@media (min-width: 52rem) {
-  .cover {
-    width: 100%;
-  }
-}
-
 .bookText {
   max-width: 38rem;
 }
