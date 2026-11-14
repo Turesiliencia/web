@@ -1,24 +1,12 @@
-:root {
-  /* Navy and blues from the logo, gold and cream from the book cover. This is
-     the brand's dark side; turesiliencia.com, the founder's site, is its light
-     side: the same palette and fonts on cream paper with navy ink. */
-  --navy-950: #050d1f;
-  --navy-900: #081630;
-  --blue-700: #003380;
-  --blue-500: #0066ff;
-  --gold-300: #d7ba7f;
-  --gold-600: #786721;
-  --cream: #ece9dc;
-  --mist: #a9b4cb;
-  --rule: rgb(215 186 127 / 0.2);
-  --rule-strong: rgb(215 186 127 / 0.45);
+/* Colours and the light and dark themes: theme.css, the same file as on
+   turesiliencia.com. */
+@import "./theme.css";
 
+:root {
   --font-display: var(--font-cormorant), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-montserrat), system-ui, sans-serif;
 
   --gutter: clamp(1.25rem, 5vw, 4rem);
-
-  color-scheme: dark;
 }
 
 * {
@@ -30,7 +18,7 @@
 html {
   /* Room for the sticky header when jumping to a section. */
   scroll-padding-top: 7rem;
-  background: var(--navy-950);
+  background: var(--paper);
   -webkit-text-size-adjust: 100%;
 }
 
@@ -48,8 +36,8 @@ html {
 
 body {
   min-height: 100dvh;
-  color: var(--cream);
-  background: var(--navy-950);
+  color: var(--ink);
+  background: var(--paper);
   font-family: var(--font-sans);
   font-size: 1rem;
   line-height: 1.6;
@@ -71,7 +59,7 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid var(--gold-300);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 

@@ -17,6 +17,8 @@ export type HomeContent = {
   meta: { title: string; description: string };
   languageNav: string;
   mainNav: string;
+  // The theme button's label: it is a toggle, pressed in the dark theme.
+  themeToggle: string;
   sections: Record<SectionKey, Section>;
   eyebrow: string;
   headline: [string, string];
@@ -73,6 +75,7 @@ export const home: Record<Locale, HomeContent> = {
     },
     languageNav: "Idioma",
     mainNav: "Principal",
+    themeToggle: "Tema oscuro",
     sections: {
       about: { id: "asociacion", nav: "La asociación" },
       areas: { id: "areas", nav: "Áreas" },
@@ -226,6 +229,7 @@ export const home: Record<Locale, HomeContent> = {
     },
     languageNav: "Language",
     mainNav: "Main",
+    themeToggle: "Dark theme",
     sections: {
       about: { id: "about", nav: "About" },
       areas: { id: "areas", nav: "Areas" },

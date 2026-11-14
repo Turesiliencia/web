@@ -9,7 +9,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   const t = home[locale];
 
   return (
-    <footer className={styles.footer}>
+    <footer className={`${styles.footer} dark`}>
       <div className={styles.inner}>
         <div className={styles.about}>
           <Link href={site.paths[locale]} className={styles.brand}>

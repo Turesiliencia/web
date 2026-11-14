@@ -1,5 +1,6 @@
 import { baseMetadata } from "@/content/metadata";
 import { fontVariables } from "../fonts";
+import { ThemeScript } from "@/components/ThemeScript";
 import "../globals.css";
 
 export { viewport } from "@/content/metadata";
@@ -11,7 +12,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={fontVariables}>
+    <html lang="en" className={fontVariables} suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body>{children}</body>
     </html>
   );

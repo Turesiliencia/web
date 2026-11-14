@@ -3,16 +3,17 @@
   top: 0;
   z-index: 10;
   border-bottom: 1px solid var(--rule);
-  background: rgb(5 13 31 / 0.86);
+  background: var(--header-bg);
   backdrop-filter: blur(12px);
 }
 
-/* Phone: brand and languages on the first row, the sections on the second. */
+/* Phone: brand, languages and theme button on the first row, the sections on
+   the second. */
 .inner {
   display: grid;
   grid-template-columns: 1fr auto;
   grid-template-areas:
-    "brand languages"
+    "brand tools"
     "nav nav";
   align-items: center;
   max-width: calc(76rem + 2 * var(--gutter));
@@ -23,7 +24,7 @@
 @media (min-width: 60rem) {
   .inner {
     grid-template-columns: auto 1fr auto;
-    grid-template-areas: "brand nav languages";
+    grid-template-areas: "brand nav tools";
     gap: 2rem;
     padding-block: 0.85rem;
   }
@@ -35,7 +36,7 @@
   align-items: center;
   gap: 0.6rem;
   justify-self: start;
-  color: #fff;
+  color: var(--ink);
 }
 
 .emblem {
@@ -80,7 +81,7 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--mist);
+  color: var(--ink-soft);
   transition: color 0.2s ease;
 }
 
@@ -93,13 +94,19 @@
 }
 
 .nav a:hover {
-  color: var(--cream);
+  color: var(--ink);
 }
 
 /* Language switch */
 
+.tools {
+  grid-area: tools;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 .languages {
-  grid-area: languages;
   display: flex;
   list-style: none;
   font: 600 0.75rem / 1 var(--font-sans);
@@ -113,16 +120,16 @@
 .languages a {
   display: block;
   padding: 0.7rem 0.75rem 0.7rem 0.95rem;
-  color: var(--mist);
+  color: var(--ink-soft);
   transition: color 0.2s ease;
 }
 
 .languages a:hover {
-  color: var(--cream);
+  color: var(--ink);
 }
 
 .languages a[aria-current="page"] {
-  color: var(--gold-300);
+  color: var(--accent);
 }
 
 .visuallyHidden {
@@ -132,4 +139,36 @@
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
+}
+
+/* Theme button, as on turesiliencia.com */
+
+.themeToggle {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 50%;
+  background: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.themeToggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.themeToggle svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }

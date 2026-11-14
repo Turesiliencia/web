@@ -1,0 +1,113 @@
+/* Colours and themes. This file is the same on turesiliencia.org and
+   turesiliencia.com (src/app/theme.css there, src/styles/theme.css here):
+   change both together.
+
+   The palette: navy and blues from the logo, gold and cream from the book
+   cover. Styles never use it directly, only the roles below, which take one
+   value in the light theme and another in the dark one.
+
+   Light is the default. Dark applies when the visitor chooses it (the header's
+   button sets data-theme on <html> and remembers it), when their system is dark
+   and they have not chosen, and always inside a `.dark` band (the footer). */
+
+:root {
+  --navy-950: #050d1f;
+  --navy-900: #081630;
+  --blue-700: #003380;
+  --gold-300: #d7ba7f;
+  --cream: #ece9dc;
+  --mist: #a9b4cb;
+}
+
+/* Light: warm paper rather than white, ink a soft navy rather than black. */
+:root {
+  --paper: #f4f0e6;
+  --paper-deep: #ebe4d3;
+  --ink: #1a2844;
+  --ink-soft: #4b5670;
+  --accent: #765c27;
+  --accent-hover: #57431a;
+  --rule: rgb(118 92 39 / 0.2);
+  --rule-strong: rgb(118 92 39 / 0.42);
+  --band: linear-gradient(180deg, var(--paper-deep), rgb(235 228 211 / 0));
+  --glow:
+    radial-gradient(ellipse 50% 36% at 50% 18%, rgb(255 255 255 / 0.5), transparent 70%),
+    radial-gradient(ellipse 85% 70% at 50% 0%, rgb(215 186 127 / 0.28), transparent 72%);
+  --header-bg: rgb(244 240 230 / 0.88);
+  --medallion: radial-gradient(circle, #fff 30%, rgb(255 255 255 / 0.55) 72%);
+  --headline-fill: linear-gradient(180deg, #8f7232 0%, #765c27 55%, #5e481d 100%);
+  --shadow: rgb(26 40 68 / 0.18);
+  --button-bg: var(--navy-900);
+  --button-ink: var(--cream);
+  --button-hover: var(--blue-700);
+
+  color-scheme: light;
+}
+
+/* Dark: the navy page, cream text and gold of the book cover. The two blocks
+   below hold the same values: plain CSS can't share them between a selector
+   and a media query. */
+:root[data-theme="dark"],
+.dark {
+  --paper: var(--navy-950);
+  --paper-deep: var(--navy-900);
+  --ink: var(--cream);
+  --ink-soft: var(--mist);
+  --accent: var(--gold-300);
+  --accent-hover: #ecd9ac;
+  --rule: rgb(215 186 127 / 0.2);
+  --rule-strong: rgb(215 186 127 / 0.45);
+  --band: linear-gradient(180deg, rgb(8 22 48 / 0.7), rgb(8 22 48 / 0));
+  --glow:
+    radial-gradient(ellipse 46% 34% at 50% 18%, rgb(0 102 255 / 0.16), transparent 70%),
+    radial-gradient(ellipse 85% 70% at 50% 0%, rgb(0 51 128 / 0.6), transparent 72%);
+  --header-bg: rgb(5 13 31 / 0.86);
+  --medallion: radial-gradient(circle, rgb(5 13 31 / 0.55), rgb(5 13 31 / 0.15) 70%);
+  --headline-fill: linear-gradient(180deg, #ecd9ac 0%, #d7ba7f 48%, #b9975a 100%);
+  --shadow: rgb(0 0 0 / 0.45);
+  --button-bg: var(--gold-300);
+  --button-ink: var(--navy-950);
+  --button-hover: #e6cf9c;
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: var(--navy-950);
+    --paper-deep: var(--navy-900);
+    --ink: var(--cream);
+    --ink-soft: var(--mist);
+    --accent: var(--gold-300);
+    --accent-hover: #ecd9ac;
+    --rule: rgb(215 186 127 / 0.2);
+    --rule-strong: rgb(215 186 127 / 0.45);
+    --band: linear-gradient(180deg, rgb(8 22 48 / 0.7), rgb(8 22 48 / 0));
+    --glow:
+      radial-gradient(ellipse 46% 34% at 50% 18%, rgb(0 102 255 / 0.16), transparent 70%),
+      radial-gradient(ellipse 85% 70% at 50% 0%, rgb(0 51 128 / 0.6), transparent 72%);
+    --header-bg: rgb(5 13 31 / 0.86);
+    --medallion: radial-gradient(circle, rgb(5 13 31 / 0.55), rgb(5 13 31 / 0.15) 70%);
+    --headline-fill: linear-gradient(180deg, #ecd9ac 0%, #d7ba7f 48%, #b9975a 100%);
+    --shadow: rgb(0 0 0 / 0.45);
+    --button-bg: var(--gold-300);
+    --button-ink: var(--navy-950);
+    --button-hover: #e6cf9c;
+
+    color-scheme: dark;
+  }
+}
+
+.dark {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* The theme button shows the moon in the light theme and the sun in the dark
+   one. Without JavaScript it could do nothing, so it stays hidden until the
+   script in the page's head has set data-theme. */
+:root:not([data-theme]) .theme-toggle,
+:root[data-theme="dark"] .theme-toggle .moon,
+:root:not([data-theme="dark"]) .theme-toggle .sun {
+  display: none;
+}

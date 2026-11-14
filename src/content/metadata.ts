@@ -3,9 +3,13 @@ import { book } from "./book";
 import { home } from "./home";
 import { site, type Locale } from "./site";
 
+// Light and dark, as in src/app/theme.css.
 export const viewport: Viewport = {
-  themeColor: "#050d1f",
-  colorScheme: "dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f4f0e6" },
+    { media: "(prefers-color-scheme: dark)", color: "#050d1f" },
+  ],
+  colorScheme: "light dark",
 };
 
 export const baseMetadata: Metadata = {

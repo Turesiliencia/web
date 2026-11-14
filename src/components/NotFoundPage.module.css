@@ -53,21 +53,21 @@
   font-size: 0.9375rem;
   line-height: 1.7;
   text-wrap: pretty;
-  color: var(--mist);
+  color: var(--ink-soft);
 }
 
 .english strong {
   font-weight: 600;
-  color: var(--cream);
+  color: var(--ink);
 }
 
 .english a {
-  color: var(--gold-300);
+  color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 0.2em;
   text-decoration-thickness: 1px;
 }
 
 .english a:hover {
-  color: #e6cf9c;
+  color: var(--accent-hover);
 }

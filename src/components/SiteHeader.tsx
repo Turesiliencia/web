@@ -3,6 +3,7 @@ import { home, type SectionKey } from "@/content/home";
 import { locales, site, type Locale } from "@/content/site";
 import { LogoEmblem, LogoWordmark } from "./Logo";
 import styles from "./SiteHeader.module.css";
+import { ThemeToggle } from "./ThemeToggle";
 
 const languageNames: Record<Locale, string> = {
   es: "Español",
@@ -56,7 +57,10 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             ))}
           </ul>
         </nav>
-        <LanguageSwitch locale={locale} />
+        <div className={styles.tools}>
+          <LanguageSwitch locale={locale} />
+          <ThemeToggle label={t.themeToggle} />
+        </div>
       </div>
     </header>
   );

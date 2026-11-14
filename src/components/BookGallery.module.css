@@ -18,8 +18,8 @@
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   box-shadow:
-    0 1.5rem 3rem rgb(0 0 0 / 0.5),
-    0 0 0 1px rgb(215 186 127 / 0.25);
+    0 1.5rem 3rem var(--shadow),
+    0 0 0 1px var(--rule);
 }
 
 .track::-webkit-scrollbar {
@@ -61,19 +61,19 @@
   content: "";
   width: 0.55rem;
   height: 0.55rem;
-  border: 1px solid var(--gold-300);
+  border: 1px solid var(--accent);
   border-radius: 50%;
   transition: background-color 0.2s ease;
 }
 
 .dot[aria-current="true"]::before {
-  background: var(--gold-300);
+  background: var(--accent);
 }
 
 .dot:hover::before {
-  background: rgb(215 186 127 / 0.5);
+  background: var(--rule-strong);
 }
 
 .dot[aria-current="true"]:hover::before {
-  background: var(--gold-300);
+  background: var(--accent);
 }

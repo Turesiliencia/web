@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { NotFoundPage } from "@/components/NotFoundPage";
+import { ThemeScript } from "@/components/ThemeScript";
 import { notFound } from "@/content/not-found";
 import { fontVariables } from "./fonts";
 import "./globals.css";
@@ -11,7 +12,10 @@ export const metadata: Metadata = { title: notFound.title };
 
 export default function GlobalNotFound() {
   return (
-    <html lang="es" className={fontVariables}>
+    <html lang="es" className={fontVariables} suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body>
         <NotFoundPage />
       </body>
