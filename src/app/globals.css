@@ -1,5 +1,7 @@
 :root {
-  /* Navy and blues from the logo, gold and cream from the book cover. */
+  /* Navy and blues from the logo, gold and cream from the book cover. This is
+     the brand's dark side; turesiliencia.com, the founder's site, is its light
+     side: the same palette and fonts on cream paper with navy ink. */
   --navy-950: #050d1f;
   --navy-900: #081630;
   --blue-700: #003380;
