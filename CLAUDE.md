@@ -12,7 +12,7 @@ Today the site is a single home page in Spanish at `/` and English at `/en`, liv
 
 While the site is under construction, `baseMetadata` in `src/content/metadata.ts` sets `robots: { index: false, follow: false }` for every page. It has to be removed at launch.
 
-The brief, the source material, the account details and the project's current state are not in the repository. They live one level up, in the folder that holds both sites and is in no repository: `../CLAUDE.md`, `../CLAUDE.local.md`, `../notes/` (the brief is `../notes/brief.md`) and `../refs/`. Read `../CLAUDE.local.md` before designing or writing content. Git does not carry them, so on a new machine they are copied over by hand; if they are missing, ask before writing content.
+The brief, the source material, the account details and the project's current state are not in the repository. They live one level up, in the folder that holds both sites and is in no repository: `../CLAUDE.md`, `../CLAUDE.local.md` (which also sums up the brief) and `../refs/`. Read `../CLAUDE.local.md` before designing or writing content. Git does not carry them, so on a new machine they are copied over by hand; if they are missing, ask before writing content.
 
 ## Commands
 
@@ -83,7 +83,7 @@ gh api repos/Turesiliencia/web/commits/<sha>/status \
 
 Never committed:
 
-- Anything from the private material one level up (`../CLAUDE.local.md`, `../notes/`, `../refs/`), copied or paraphrased into tracked files, commit messages or code comments. The exception is material the organization asked to publish, such as the book's cover and description: `../notes/refs.md` says which. `.env*` is gitignored, and so are `refs/` and `CLAUDE.local.md` in case a copy ever lands in this folder.
+- Anything from the private material one level up (`../CLAUDE.local.md`, `../refs/`), copied or paraphrased into tracked files, commit messages or code comments. The exception is material the organization asked to publish, such as the book's cover and description: `../CLAUDE.local.md` says which. `.env*` is gitignored, and so are `refs/` and `CLAUDE.local.md` in case a copy ever lands in this folder.
 - Internal documents, plans, pricing, correspondence, legal paperwork, or personal data of anyone.
 - Account identifiers, screenshots or settings of the organization's hosting, domain, mail or payment accounts.
 
