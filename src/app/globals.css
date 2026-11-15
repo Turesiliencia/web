@@ -1,9 +1,7 @@
-/* Colours and the light and dark themes: theme.css, the same file as on
-   turesiliencia.com. */
+/* Colours and the light and dark themes: theme.css. */
 @import "./theme.css";
 
-/* The association's own light theme, over the shared one. turesiliencia.com
-   keeps theme.css as it is: warm paper and gold, her personal site. Here the
+/* The association's own light theme, over theme.css's. Here the
    paper is cool and white, labels and links take the logo's institutional
    blue, and gold is kept for details (numbers, rules, the hero's capitals).
    These rules come after theme.css and set :root only, so its dark theme
