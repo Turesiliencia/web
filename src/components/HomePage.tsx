@@ -236,6 +236,13 @@ export function HomePage({ locale }: { locale: Locale }) {
               </a>
             </li>
           </ul>
+          <p className={styles.personal}>
+            <strong>{t.contact.personal.question}</strong> {t.contact.personal.text}{" "}
+            <a href={site.founder.url} hrefLang="es">
+              {site.founder.host}
+            </a>
+            .
+          </p>
         </section>
       </main>
 

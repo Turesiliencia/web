@@ -56,10 +56,15 @@ export type HomeContent = {
     body: string;
     email: string;
     instagram: string;
+    // A line under the buttons for people looking for support of their own,
+    // which the association doesn't offer: it points to the founder's site.
+    personal: { question: string; text: string };
   };
   footer: {
     tagline: string;
     kind: string;
+    // "Founded by", followed by the founder's name, linked to her site.
+    foundedBy: string;
     explore: string;
     follow: string;
     language: string;
@@ -212,10 +217,15 @@ export const home: Record<Locale, HomeContent> = {
       body: "Si representas a una universidad, una empresa o una entidad y quieres colaborar con TuResiliencia, o si quieres saber más sobre su trabajo, aquí nos encuentras.",
       email: "Escríbenos",
       instagram: "Síguenos en Instagram",
+      personal: {
+        question: "¿Buscas acompañamiento personal?",
+        text: "Deissy Olarte, fundadora de TuResiliencia, ofrece sesiones online en su web,",
+      },
     },
     footer: {
       tagline: "Reconstruir vidas. Transformar realidades.",
       kind: "Asociación sin ánimo de lucro",
+      foundedBy: "Fundada por",
       explore: "Explorar",
       follow: "Contacto",
       language: "Idioma",
@@ -367,10 +377,15 @@ export const home: Record<Locale, HomeContent> = {
       body: "If you represent a university, a company or an organisation and would like to work with TuResiliencia, or simply want to know more about what it does, this is where to find us.",
       email: "Write to us",
       instagram: "Follow us on Instagram",
+      personal: {
+        question: "Looking for personal support?",
+        text: "Deissy Olarte, TuResiliencia’s founder, offers online sessions on her own site, in Spanish:",
+      },
     },
     footer: {
       tagline: "Rebuilding lives. Transforming realities.",
       kind: "Non-profit association",
+      foundedBy: "Founded by",
       explore: "Explore",
       follow: "Contact",
       language: "Language",

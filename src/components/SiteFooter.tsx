@@ -18,6 +18,12 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </Link>
           <p className={styles.tagline}>{t.footer.tagline}</p>
           <p className={styles.kind}>{t.footer.kind}</p>
+          <p className={styles.kind}>
+            {t.footer.foundedBy}{" "}
+            <a href={site.founder.url} hrefLang="es">
+              {site.founder.name}
+            </a>
+          </p>
         </div>
 
         <nav aria-labelledby="footer-explore" className={styles.column}>

@@ -59,6 +59,23 @@
   color: var(--ink-soft);
 }
 
+.kind + .kind {
+  margin-top: 0.25rem;
+}
+
+.kind a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--rule-strong);
+  transition: text-decoration-color 0.2s ease;
+}
+
+.kind a:hover {
+  text-decoration-color: currentColor;
+}
+
 .column h2 {
   font-size: 0.6875rem;
   font-weight: 600;

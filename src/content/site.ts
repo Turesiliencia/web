@@ -10,5 +10,12 @@ export const site = {
     handle: "@turesiliencia_",
     url: "https://www.instagram.com/turesiliencia_",
   },
+  // The founder's own site, in Spanish only, in her first-person voice: the
+  // association links to it for personal support, never copies its content.
+  founder: {
+    name: "Deissy Olarte",
+    url: "https://turesiliencia.com",
+    host: "turesiliencia.com",
+  },
   paths: { es: "/", en: "/en" } satisfies Record<Locale, string>,
 };
