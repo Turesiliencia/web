@@ -25,7 +25,7 @@ npx eslint src/components/HomePage.tsx     # lint a single file
 npx next typegen && npx tsc --noEmit       # type-check without building
 ```
 
-There is no test runner and no `type-check` script. Package manager is npm (`package-lock.json`).
+There is no test runner and no `type-check` script. Package manager is npm (`package-lock.json`). Node 26: `engines.node` in `package.json` is `26.x`, which is also what Vercel builds with (it overrides the project's setting), and `.nvmrc` pins the same for `nvm use`, as in `../turesiliencia-com`.
 
 To look at a page without opening a browser, serve the build (`npx next start -p 3457`) and screenshot it with headless Chrome, at a desktop and a phone width, in both languages. The page is longer than a screen: use a tall window (about 5200 px at 1440 wide, 8600 px at 390) and crop, and give lazy-loaded images time with `--virtual-time-budget`:
 
