@@ -12,8 +12,12 @@
   align-items: center;
   justify-content: center;
   padding: clamp(3rem, 10vh, 6rem) var(--gutter) clamp(4rem, 12vh, 7rem);
-  background: var(--glow), var(--paper-deep);
   text-align: center;
+}
+
+/* With the `dark` class, to outweigh its plain background in theme.css. */
+.main:global(.dark) {
+  background: var(--glow), var(--paper-deep);
 }
 
 .mark {

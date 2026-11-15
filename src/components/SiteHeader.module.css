@@ -3,8 +3,12 @@
   top: 0;
   z-index: 10;
   border-bottom: 1px solid var(--rule);
-  /* Solid navy, the hero's: the header has the `dark` class, and see-through
-     it would turn grey over the light page. */
+}
+
+/* Solid navy, the hero's: see-through, it would turn grey over the light
+   page. Written with the `dark` class the header carries, to outweigh that
+   class's plain background in theme.css, which the build may load later. */
+.header:global(.dark) {
   background: var(--paper-deep);
 }
 

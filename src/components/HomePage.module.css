@@ -38,8 +38,15 @@
   align-items: center;
   padding: clamp(3.5rem, 9vh, 5.5rem) var(--gutter) 0;
   border-bottom: 1px solid var(--rule-strong);
-  background: var(--glow), var(--paper-deep);
   text-align: center;
+}
+
+/* Its ground, and the contact band's. Written with the `dark` class, so
+   that it outweighs that class's own plain background in theme.css, which
+   the build may load after this file. */
+.hero:global(.dark),
+.contact:global(.dark) {
+  background: var(--glow), var(--paper-deep);
 }
 
 /* The association's pattern, where the .com has rings: fine upright lines,
@@ -676,7 +683,6 @@
   align-items: center;
   padding: clamp(4rem, 10vh, 6.5rem) var(--gutter);
   border-top: 1px solid var(--rule-strong);
-  background: var(--glow), var(--paper-deep);
   text-align: center;
 }
 
