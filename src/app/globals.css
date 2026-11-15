@@ -2,6 +2,42 @@
    turesiliencia.com. */
 @import "./theme.css";
 
+/* The association's own light theme, over the shared one. turesiliencia.com
+   keeps theme.css as it is: warm paper and gold, her personal site. Here the
+   paper is cool and white, labels and links take the logo's institutional
+   blue, and gold is kept for details (numbers, rules, the hero's capitals).
+   These rules come after theme.css and set :root only, so its dark theme
+   (a choice, the system's, or a `.dark` band) still wins. */
+:root {
+  --paper: #f5f7fa;
+  --paper-deep: #e7ecf3;
+  --ink: #0e1d3a;
+  --ink-soft: #46546e;
+  --accent: #0b3d91;
+  --accent-hover: #072a66;
+  --rule: rgb(14 29 58 / 0.12);
+  --rule-strong: rgb(118 92 39 / 0.45);
+  --band: linear-gradient(180deg, var(--paper-deep), rgb(231 236 243 / 0));
+
+  /* Roles of this site only, with a dark value below: the gold of numbers
+     and small details, and the ground of a card. */
+  --detail: #765c27;
+  --surface: #fff;
+}
+
+:root[data-theme="dark"],
+.dark {
+  --detail: var(--gold-300);
+  --surface: rgb(8 22 48 / 0.65);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --detail: var(--gold-300);
+    --surface: rgb(8 22 48 / 0.65);
+  }
+}
+
 :root {
   --font-display: var(--font-cormorant), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-montserrat), system-ui, sans-serif;

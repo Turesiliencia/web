@@ -41,8 +41,10 @@ export function LanguageSwitch({ locale }: { locale: Locale }) {
 export function SiteHeader({ locale }: { locale: Locale }) {
   const t = home[locale];
 
+  // Navy in both themes, like the footer (`dark`): the association's pages
+  // open on its institutional blue.
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} dark`}>
       <div className={styles.inner}>
         <Link href={site.paths[locale]} className={styles.brand}>
           <LogoEmblem className={styles.emblem} />

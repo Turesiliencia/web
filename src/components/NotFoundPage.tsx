@@ -13,7 +13,7 @@ export function NotFoundPage() {
     <div className={styles.page}>
       <SiteHeader locale="es" />
 
-      <main className={styles.main}>
+      <main className={`${styles.main} dark`}>
         <div className={styles.mark}>
           <LogoEmblem className={styles.emblem} />
         </div>

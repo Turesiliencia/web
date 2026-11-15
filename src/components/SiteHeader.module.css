@@ -3,8 +3,9 @@
   top: 0;
   z-index: 10;
   border-bottom: 1px solid var(--rule);
-  background: var(--header-bg);
-  backdrop-filter: blur(12px);
+  /* Solid navy, the hero's: the header has the `dark` class, and see-through
+     it would turn grey over the light page. */
+  background: var(--paper-deep);
 }
 
 /* Phone: brand, languages and theme button on the first row, the sections on

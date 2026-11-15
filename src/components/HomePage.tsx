@@ -35,7 +35,8 @@ export function HomePage({ locale }: { locale: Locale }) {
       <SiteHeader locale={locale} />
 
       <main>
-        <section className={styles.hero}>
+        {/* Navy in both themes (`dark`), under the navy header. */}
+        <section className={`${styles.hero} dark`}>
           <div className={styles.mark}>
             <LogoEmblem className={styles.emblem} />
           </div>
@@ -57,10 +58,15 @@ export function HomePage({ locale }: { locale: Locale }) {
               </a>
             </li>
           </ul>
+          <ul className={styles.facts}>
+            {t.facts.map((fact) => (
+              <li key={fact}>{fact}</li>
+            ))}
+          </ul>
         </section>
 
         <section className={styles.concept} aria-labelledby="concept">
-          <h2 id="concept" className={styles.label}>
+          <h2 id="concept" className={`${styles.label} ${styles.numbered}`}>
             {t.concept.label}
           </h2>
           <figure className={styles.quote}>
@@ -79,7 +85,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         >
           <div className={styles.aboutIntro}>
             <div>
-              <p className={styles.label}>{t.about.label}</p>
+              <p className={`${styles.label} ${styles.numbered}`}>{t.about.label}</p>
               <h2 id="about-title" className={styles.title}>
                 {t.about.title}
               </h2>
@@ -122,7 +128,7 @@ export function HomePage({ locale }: { locale: Locale }) {
           aria-labelledby="areas-title"
         >
           <div className={styles.sectionHead}>
-            <p className={styles.label}>{t.areas.label}</p>
+            <p className={`${styles.label} ${styles.numbered}`}>{t.areas.label}</p>
             <h2 id="areas-title" className={styles.title}>
               {t.areas.title}
             </h2>
@@ -159,6 +165,29 @@ export function HomePage({ locale }: { locale: Locale }) {
           </ol>
         </section>
 
+        <section className={styles.network} aria-labelledby="network-title">
+          <div className={styles.networkInner}>
+            <div>
+              <p className={`${styles.label} ${styles.numbered}`}>{t.network.label}</p>
+              <h2 id="network-title" className={styles.title}>
+                {t.network.title}
+              </h2>
+              <p className={styles.body}>{t.network.intro}</p>
+              <a className={`${styles.primary} ${styles.networkAction}`} href={mailto(t.network.label)}>
+                {t.network.action}
+              </a>
+            </div>
+            <dl className={styles.partners}>
+              {t.network.items.map((item) => (
+                <div key={item.name}>
+                  <dt>{item.name}</dt>
+                  <dd>{item.text}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+
         <section
           id={sections.book.id}
           className={styles.book}
@@ -167,7 +196,7 @@ export function HomePage({ locale }: { locale: Locale }) {
           <div className={styles.bookInner}>
             <BookGallery labels={t.book.gallery} />
             <div className={styles.bookText}>
-              <h2 id="book" className={styles.label}>
+              <h2 id="book" className={`${styles.label} ${styles.numbered}`}>
                 {t.book.label}
               </h2>
               <p className={styles.bookTitle}>
@@ -211,10 +240,10 @@ export function HomePage({ locale }: { locale: Locale }) {
 
         <section
           id={sections.contact.id}
-          className={styles.contact}
+          className={`${styles.contact} dark`}
           aria-labelledby="contact-title"
         >
-          <p className={styles.label}>{t.contact.label}</p>
+          <p className={`${styles.label} ${styles.numbered}`}>{t.contact.label}</p>
           <h2 id="contact-title">{t.contact.title}</h2>
           <p>{t.contact.body}</p>
           <ul className={styles.actions}>

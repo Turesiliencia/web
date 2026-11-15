@@ -25,6 +25,8 @@ export type HomeContent = {
   subtitle: string;
   lede: string;
   cta: { about: string; book: string };
+  // Under the hero's buttons: what kind of organisation this is.
+  facts: string[];
   concept: { label: string; quote: string; body: string; attribution: string };
   about: {
     label: string;
@@ -34,6 +36,14 @@ export type HomeContent = {
     fields: { label: string; intro: string; items: { name: string; text: string }[] };
   };
   areas: { label: string; title: string; intro: string; items: Area[] };
+  // Who the association works with, and what it offers each.
+  network: {
+    label: string;
+    title: string;
+    intro: string;
+    items: { name: string; text: string }[];
+    action: string;
+  };
   book: {
     label: string;
     by: string;
@@ -91,8 +101,9 @@ export const home: Record<Locale, HomeContent> = {
     headline: ["Reconstruir vidas", "Transformar realidades"],
     subtitle:
       "Conocimiento, dignidad e innovación al servicio de la Reconstrucción Humana",
-    lede: "TuResiliencia es una asociación dedicada a comprender y acompañar cómo las personas rehacen su identidad, sus vínculos y su proyecto de vida después de las experiencias que lo cambian todo.",
+    lede: "Somos una asociación dedicada a comprender y acompañar cómo las personas rehacen su identidad, sus vínculos y su proyecto de vida después de las experiencias que lo cambian todo.",
     cta: { about: "Conocer la asociación", book: "Descubrir el libro" },
+    facts: ["Sin ánimo de lucro", "Ámbito estatal", "Vocación internacional"],
     concept: {
       label: "Reconstrucción Humana",
       quote: "Reconstruirse no es volver al punto de partida.",
@@ -104,7 +115,7 @@ export const home: Record<Locale, HomeContent> = {
       title: "Conocimiento al servicio de las personas",
       body: [
         "TuResiliencia es una asociación sin ánimo de lucro, de ámbito estatal y con vocación internacional.",
-        "Promueve la Reconstrucción Humana, el conocimiento, la inclusión y la innovación a través de la formación, la investigación, la cooperación y las alianzas entre personas, empresas, instituciones y comunidades.",
+        "Promovemos la Reconstrucción Humana, el conocimiento, la inclusión y la innovación a través de la formación, la investigación, la cooperación y las alianzas entre personas, empresas, instituciones y comunidades.",
       ],
       pillars: [
         {
@@ -113,7 +124,7 @@ export const home: Record<Locale, HomeContent> = {
         },
         {
           name: "Dignidad",
-          text: "Cada persona es más que lo que le ha ocurrido: se la mira desde sus capacidades y sus derechos.",
+          text: "Cada persona es más que lo que le ha ocurrido: la miramos desde sus capacidades y sus derechos.",
         },
         {
           name: "Innovación",
@@ -122,7 +133,7 @@ export const home: Record<Locale, HomeContent> = {
       ],
       fields: {
         label: "Ámbitos de actuación",
-        intro: "Sus estatutos recogen seis ámbitos de actuación.",
+        intro: "Nuestros estatutos recogen seis ámbitos de actuación.",
         items: [
           {
             name: "Reconstrucción Humana, inclusión y derechos humanos",
@@ -155,7 +166,7 @@ export const home: Record<Locale, HomeContent> = {
       label: "Áreas",
       title: "Una organización, varios caminos",
       intro:
-        "Cuatro áreas dan forma a su trabajo. Si la tuya es una universidad, una empresa o una entidad, escríbenos desde la que te interese.",
+        "Nuestro trabajo se organiza en cuatro áreas. Si representas a una universidad, una empresa o una entidad, escríbenos desde la que te interese.",
       items: [
         {
           name: "Academia",
@@ -172,7 +183,7 @@ export const home: Record<Locale, HomeContent> = {
         {
           name: "Alianzas",
           description:
-            "Para empresas y organizaciones que quieran trabajar con TuResiliencia: bienestar organizacional, impacto social y transferencia de conocimiento.",
+            "Para empresas y organizaciones que quieran trabajar con nosotros: bienestar organizacional, impacto social y transferencia de conocimiento.",
           action: { label: "Proponer una alianza", subject: "Alianzas" },
         },
         {
@@ -187,6 +198,31 @@ export const home: Record<Locale, HomeContent> = {
           },
         },
       ],
+    },
+    network: {
+      label: "Trabajo en red",
+      title: "Lo que hacemos, lo hacemos con otros",
+      intro:
+        "La Reconstrucción Humana no se hace en solitario. Buscamos aliados que compartan este propósito, y cada uno encuentra en la asociación su propia puerta de entrada.",
+      items: [
+        {
+          name: "Universidades y centros de investigación",
+          text: "Investigación conjunta, formación especializada y transferencia de conocimiento.",
+        },
+        {
+          name: "Empresas",
+          text: "Bienestar organizacional, liderazgo, diversidad, empresa familiar y proyectos de impacto social.",
+        },
+        {
+          name: "Administraciones públicas",
+          text: "Programas de inclusión, cohesión territorial, desarrollo rural y cooperación internacional.",
+        },
+        {
+          name: "Entidades sociales y comunidades",
+          text: "Alianzas para acompañar a personas y familias ante la pérdida, la migración o la exclusión.",
+        },
+      ],
+      action: "Proponer una colaboración",
     },
     book: {
       label: "Novedad editorial",
@@ -214,7 +250,7 @@ export const home: Record<Locale, HomeContent> = {
     contact: {
       label: "Contacto",
       title: "Hablemos",
-      body: "Si representas a una universidad, una empresa o una entidad y quieres colaborar con TuResiliencia, o si quieres saber más sobre su trabajo, aquí nos encuentras.",
+      body: "Si representas a una universidad, una empresa o una entidad y quieres colaborar con nosotros, o si quieres saber más sobre nuestro trabajo, aquí nos encuentras.",
       email: "Escríbenos",
       instagram: "Síguenos en Instagram",
       personal: {
@@ -250,8 +286,9 @@ export const home: Record<Locale, HomeContent> = {
     headline: ["Rebuilding lives", "Transforming realities"],
     subtitle:
       "Knowledge, dignity and innovation in the service of Human Reconstruction",
-    lede: "TuResiliencia is an association devoted to understanding and supporting how people rebuild their identity, their bonds and their life project after the experiences that change everything.",
+    lede: "We are an association devoted to understanding and supporting how people rebuild their identity, their bonds and their life project after the experiences that change everything.",
     cta: { about: "About the association", book: "Discover the book" },
+    facts: ["Non-profit", "Nationwide in Spain", "International outlook"],
     concept: {
       label: "Human Reconstruction",
       quote: "To rebuild yourself is not to return to where you started.",
@@ -263,7 +300,7 @@ export const home: Record<Locale, HomeContent> = {
       title: "Knowledge in the service of people",
       body: [
         "TuResiliencia is a non-profit association based in Spain, working nationwide with an international outlook.",
-        "It promotes Human Reconstruction, knowledge, inclusion and innovation through training, research, cooperation and partnerships between people, companies, institutions and communities.",
+        "We promote Human Reconstruction, knowledge, inclusion and innovation through training, research, cooperation and partnerships between people, companies, institutions and communities.",
       ],
       pillars: [
         {
@@ -272,7 +309,7 @@ export const home: Record<Locale, HomeContent> = {
         },
         {
           name: "Dignity",
-          text: "Every person is more than what has happened to them, and is seen through their abilities and their rights.",
+          text: "Every person is more than what has happened to them: we see them through their abilities and their rights.",
         },
         {
           name: "Innovation",
@@ -281,7 +318,7 @@ export const home: Record<Locale, HomeContent> = {
       ],
       fields: {
         label: "Fields of action",
-        intro: "Its statutes set out six fields of action.",
+        intro: "Our statutes set out six fields of action.",
         items: [
           {
             name: "Human Reconstruction, inclusion and human rights",
@@ -314,7 +351,7 @@ export const home: Record<Locale, HomeContent> = {
       label: "Areas",
       title: "One organisation, many paths",
       intro:
-        "Four areas shape its work. If you represent a university, a company or an organisation, write to us about the one that interests you.",
+        "Our work is organised in four areas. If you represent a university, a company or an organisation, write to us about the one that interests you.",
       items: [
         {
           name: "Academy",
@@ -331,7 +368,7 @@ export const home: Record<Locale, HomeContent> = {
         {
           name: "Partnerships",
           description:
-            "For companies and organisations that want to work with TuResiliencia: organisational wellbeing, social impact and knowledge transfer.",
+            "For companies and organisations that want to work with us: organisational wellbeing, social impact and knowledge transfer.",
           action: { label: "Propose a partnership", subject: "Partnerships" },
         },
         {
@@ -346,6 +383,31 @@ export const home: Record<Locale, HomeContent> = {
           },
         },
       ],
+    },
+    network: {
+      label: "Working together",
+      title: "What we do, we do with others",
+      intro:
+        "Human Reconstruction is not done alone. We look for partners who share this purpose, and each of them finds its own way into the association.",
+      items: [
+        {
+          name: "Universities and research centres",
+          text: "Joint research, specialised training and knowledge transfer.",
+        },
+        {
+          name: "Companies",
+          text: "Organisational wellbeing, leadership, diversity, family business and social impact projects.",
+        },
+        {
+          name: "Public bodies",
+          text: "Programmes for inclusion, territorial cohesion, rural development and international cooperation.",
+        },
+        {
+          name: "Social organisations and communities",
+          text: "Partnerships to support people and families facing loss, migration or exclusion.",
+        },
+      ],
+      action: "Propose a collaboration",
     },
     book: {
       label: "New book",
@@ -374,7 +436,7 @@ export const home: Record<Locale, HomeContent> = {
     contact: {
       label: "Contact",
       title: "Get in touch",
-      body: "If you represent a university, a company or an organisation and would like to work with TuResiliencia, or simply want to know more about what it does, this is where to find us.",
+      body: "If you represent a university, a company or an organisation and would like to work with us, or simply want to know more about what we do, this is where to find us.",
       email: "Write to us",
       instagram: "Follow us on Instagram",
       personal: {

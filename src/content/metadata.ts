@@ -6,8 +6,9 @@ import { site, type Locale } from "./site";
 // Light and dark, as in src/app/theme.css.
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f4f0e6" },
-    { media: "(prefers-color-scheme: dark)", color: "#050d1f" },
+    // The header is navy in both themes.
+    { media: "(prefers-color-scheme: light)", color: "#081630" },
+    { media: "(prefers-color-scheme: dark)", color: "#081630" },
   ],
   colorScheme: "light dark",
 };

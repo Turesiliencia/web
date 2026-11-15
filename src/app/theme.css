@@ -8,7 +8,11 @@
 
    Light is the default. Dark applies when the visitor chooses it (the header's
    button sets data-theme on <html> and remembers it), when their system is dark
-   and they have not chosen, and always inside a `.dark` band (the footer). */
+   and they have not chosen, and always inside a `.dark` band (the footer).
+
+   The light theme below is turesiliencia.com's warm paper and gold. The .org
+   lays its own over it in src/app/globals.css: cool white paper, the logo's
+   blue for labels and links, gold kept for details. The dark theme is shared. */
 
 :root {
   --navy-950: #050d1f;

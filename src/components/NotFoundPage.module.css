@@ -1,4 +1,5 @@
-/* The home page's hero, cut down to a message and a way back. */
+/* The home page's hero, cut down to a message and a way back: navy in both
+   themes too (`dark`). */
 
 .page {
   composes: page from "./HomePage.module.css";
@@ -11,6 +12,7 @@
   align-items: center;
   justify-content: center;
   padding: clamp(3rem, 10vh, 6rem) var(--gutter) clamp(4rem, 12vh, 7rem);
+  background: var(--glow), var(--paper-deep);
   text-align: center;
 }
 

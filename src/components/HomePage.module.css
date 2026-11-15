@@ -1,21 +1,11 @@
 .page {
   position: relative;
   isolation: isolate;
+  counter-reset: section;
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
   overflow: clip;
-}
-
-/* Light from above: the logo's blue on navy, gold on paper. */
-.page::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  z-index: -1;
-  height: min(120vh, 64rem);
-  background: var(--glow);
-  pointer-events: none;
 }
 
 .label {
@@ -25,14 +15,47 @@
   color: var(--accent);
 }
 
-/* Hero: composed like the book cover, with the lotus in the gold ring. */
+/* The sections are numbered like the chapters of a report (01 — …), an
+   institution's habit the .com doesn't share. The numbers are left out of
+   what screen readers announce. */
+.numbered::before {
+  counter-increment: section;
+  content: counter(section, decimal-leading-zero) "\2002—\2002";
+  content: counter(section, decimal-leading-zero) "\2002—\2002" / "";
+  color: var(--detail);
+}
+
+/* Hero: composed like the book cover, with the lotus in the gold ring, on
+   navy in both themes (it has the `dark` class), lit from above in the logo's
+   blue. turesiliencia.com opens on warm paper instead, her name to the left
+   over fine rings: keep the two apart. */
 
 .hero {
+  position: relative;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: clamp(3rem, 8vh, 5rem) var(--gutter) clamp(4.5rem, 11vh, 7rem);
+  padding: clamp(3.5rem, 9vh, 5.5rem) var(--gutter) 0;
+  border-bottom: 1px solid var(--rule-strong);
+  background: var(--glow), var(--paper-deep);
   text-align: center;
+}
+
+/* The association's pattern, where the .com has rings: fine upright lines,
+   like the columns of a façade, clear behind the text and coming in towards
+   the sides. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, var(--rule-strong) 1px, transparent 1px) 50% 0 /
+    clamp(4.5rem, 9vw, 7.5rem) 100%;
+  opacity: 0.6;
+  -webkit-mask-image: radial-gradient(ellipse 44% 80% at 50% 42%, transparent 55%, #000 100%);
+  mask-image: radial-gradient(ellipse 44% 80% at 50% 42%, transparent 55%, #000 100%);
+  pointer-events: none;
 }
 
 .hero > * {
@@ -153,6 +176,41 @@
   padding-inline: 1.6rem;
 }
 
+/* What kind of organisation this is, along the foot of the hero. */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  max-width: 54rem;
+  margin-top: clamp(3.5rem, 8vh, 5rem);
+  border-top: 1px solid var(--rule);
+  list-style: none;
+}
+
+.facts li {
+  display: grid;
+  place-items: center;
+  padding: 1.25rem 0.5rem 1.4rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.facts li + li {
+  border-left: 1px solid var(--rule);
+}
+
+@media (max-width: 29.99rem) {
+  .facts li {
+    padding-inline: 0.25rem;
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+  }
+}
+
 /* The idea, in her words */
 
 .concept {
@@ -198,12 +256,14 @@
   color: var(--ink-soft);
 }
 
-/* Shared section heading: gold label, display title, body */
+/* Shared section heading: blue label, display title in capitals (the .com
+   sets hers in mixed case), body */
 
 .title {
   margin-top: 1rem;
-  font: 600 clamp(2.1rem, 4.4vw, 3.2rem) / 1.08 var(--font-display);
-  letter-spacing: 0.01em;
+  font: 600 clamp(1.9rem, 3.8vw, 2.75rem) / 1.12 var(--font-display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   text-wrap: balance;
   color: var(--ink);
 }
@@ -237,27 +297,29 @@
   margin-inline: auto;
 }
 
-@media (min-width: 60rem) {
-  .aboutIntro {
-    grid-template-columns: 1.15fr 1fr;
-    gap: clamp(3rem, 7vw, 6rem);
-    align-items: start;
+/* The text, then the three pillars side by side, each under a gold rule,
+   like the columns of the hero (the .com sets hers as soft cards). */
+.pillars {
+  display: grid;
+  gap: 1.75rem clamp(1.5rem, 3vw, 2.75rem);
+}
+
+@media (min-width: 48rem) {
+  .pillars {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-.pillars {
-  display: grid;
-  gap: 1.75rem;
-}
-
 .pillars div {
-  padding-left: 1.25rem;
-  border-left: 1px solid var(--rule-strong);
+  padding-top: 1.25rem;
+  border-top: 2px solid var(--detail);
 }
 
 .pillars dt {
-  font: italic 500 1.75rem / 1.1 var(--font-display);
-  color: var(--accent);
+  font: 600 1.5rem / 1.1 var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
 }
 
 .pillars dd {
@@ -325,7 +387,7 @@
   color: var(--ink-soft);
 }
 
-/* The four areas */
+/* The four areas, as cards */
 
 .areas {
   padding: clamp(4rem, 10vh, 6.5rem) var(--gutter);
@@ -356,13 +418,15 @@
 .area {
   display: flex;
   flex-direction: column;
-  padding-top: 1.4rem;
-  border-top: 1px solid var(--rule-strong);
+  padding: 1.6rem 1.5rem 1.75rem;
+  border: 1px solid var(--rule);
+  border-top: 2px solid var(--detail);
+  background: var(--surface);
 }
 
 .number {
   font: italic 500 1.25rem / 1 var(--font-display);
-  color: var(--accent);
+  color: var(--detail);
 }
 
 .area h3 {
@@ -428,6 +492,70 @@
 
 .areaAction:hover span {
   transform: translateX(0.25rem);
+}
+
+/* Working with others: who the association works with */
+
+.network {
+  padding: clamp(4rem, 10vh, 6.5rem) var(--gutter);
+  border-top: 1px solid var(--rule);
+}
+
+.networkInner {
+  display: grid;
+  gap: 3rem;
+  max-width: 76rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 60rem) {
+  .networkInner {
+    grid-template-columns: 1fr 1.2fr;
+    gap: clamp(3rem, 7vw, 6rem);
+    align-items: start;
+  }
+}
+
+/* A table of four cells, divided by hairlines. */
+.partners {
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--rule);
+  background: var(--rule);
+}
+
+@media (min-width: 40rem) {
+  .partners {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.partners div {
+  padding: 1.5rem 1.4rem 1.6rem;
+  background: var(--surface);
+}
+
+.partners dt {
+  font: 600 0.75rem / 1.5 var(--font-sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.partners dd {
+  margin-top: 0.6rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  text-wrap: pretty;
+  color: var(--ink-soft);
+}
+
+/* .primary is declared further down, so this needs the extra class to win. */
+.primary.networkAction {
+  display: inline-flex;
+  min-width: 0;
+  margin-top: 2rem;
+  padding-inline: 1.6rem;
 }
 
 /* The book */
@@ -547,13 +675,16 @@
   flex-direction: column;
   align-items: center;
   padding: clamp(4rem, 10vh, 6.5rem) var(--gutter);
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--rule-strong);
+  background: var(--glow), var(--paper-deep);
   text-align: center;
 }
 
 .contact h2 {
   margin-top: 1rem;
-  font: italic 500 clamp(2rem, 4vw, 2.75rem) / 1.15 var(--font-display);
+  font: 600 clamp(1.9rem, 3.8vw, 2.75rem) / 1.12 var(--font-display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--ink);
 }
 
