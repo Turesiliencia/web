@@ -12,7 +12,7 @@ Today the site is a single home page in Spanish at `/` and English at `/en`, liv
 
 While the site is under construction, `baseMetadata` in `src/content/metadata.ts` sets `robots: { index: false, follow: false }` for every page. It has to be removed at launch.
 
-The brief, the source material, the account details and the project's current state are not in the repository. The source material is in `refs/` in this folder (the brief in `refs/proyecto/`), which `.gitignore` excludes; the rest lives one level up, in the folder that holds both sites and is in no repository: `../CLAUDE.md` (which also sums up the brief). Read it before designing or writing content. Git does not carry it, so on a new machine it is copied over by hand; if it is missing, ask before writing content.
+The brief, the account details and the project's current state are not in the repository. Her publishable material (logos, the book's cover, back cover, texts and QR codes) is in `material/`, the same files as in the `.com`'s, which `.gitignore` excludes: it stays on Kevin's machine, and a file from it goes public only once prepared and copied into the site; the rest lives one level up, in the folder that holds both sites and is in no repository: `../CLAUDE.md` (which also sums up the brief). Read it before designing or writing content. Git does not carry it, so on a new machine it is copied over by hand; if it is missing, ask before writing content.
 
 ## Commands
 
@@ -89,7 +89,7 @@ gh api repos/Turesiliencia/web/commits/<sha>/status \
 
 Never committed:
 
-- Anything from the private material (`refs/` here, `../CLAUDE.md`), copied or paraphrased into tracked files, commit messages or code comments. The exception is material the organization asked to publish, such as the book's cover and description: `../CLAUDE.md` says which. `.env*` and `refs/` are gitignored: never force-add them.
+- Anything from the private context (`../CLAUDE.md`), copied or paraphrased into tracked files, commit messages or code comments. The exception is material the organization asked to publish, such as the book's cover and description: `../CLAUDE.md` says which. `.env*` and `refs/` are gitignored: never force-add them.
 - Internal documents, plans, pricing, correspondence, legal paperwork, or personal data of anyone.
 - Account identifiers, screenshots or settings of the organization's hosting, domain, mail or payment accounts.
 

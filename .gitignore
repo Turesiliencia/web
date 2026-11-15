@@ -42,4 +42,5 @@ next-env.d.ts
 
 # Local-only material, not for publication
 refs/
+material/
 .claude/settings.local.json
