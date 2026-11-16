@@ -14,9 +14,6 @@ export const viewport: Viewport = {
 
 export const baseMetadata: Metadata = {
   metadataBase: new URL(site.url),
-  // Site under construction: remove at launch. Links are still followed, so
-  // that search engines reach the founder's site through this one.
-  robots: { index: false, follow: true },
 };
 
 // public/social-card-es.jpg and -en.jpg: the hero in each language, the lotus
