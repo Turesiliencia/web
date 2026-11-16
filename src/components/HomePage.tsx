@@ -1,6 +1,7 @@
 import { book } from "@/content/book";
 import { home } from "@/content/home";
 import { site, type Locale } from "@/content/site";
+import { homeStructuredData } from "@/content/structured-data";
 import { AmazonIcon } from "./AmazonIcon";
 import { BookGallery } from "./BookGallery";
 import { LogoEmblem } from "./Logo";
@@ -32,6 +33,13 @@ export function HomePage({ locale }: { locale: Locale }) {
 
   return (
     <div className={styles.page}>
+      <script
+        type="application/ld+json"
+        // "<" escaped, so no string in it can close the script.
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(homeStructuredData(locale)).replace(/</g, "\\u003c"),
+        }}
+      />
       <SiteHeader locale={locale} />
 
       <main>
